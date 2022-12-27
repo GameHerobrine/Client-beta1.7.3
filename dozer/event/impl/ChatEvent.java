@@ -1,8 +1,9 @@
 package dozer.event.impl;
 
-public class ChatEvent {
+import dozer.event.EventCancellable;
 
-    private boolean cancelled;
+public class ChatEvent extends EventCancellable {
+
     private String message;
 
     public ChatEvent(String message) {
@@ -15,14 +16,6 @@ public class ChatEvent {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public boolean isCancelled() {
-        return this.cancelled;
-    }
-
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
     }
 
 }
