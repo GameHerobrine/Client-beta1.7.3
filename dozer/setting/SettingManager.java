@@ -1,6 +1,5 @@
 package dozer.setting;
 
-import com.sun.istack.internal.NotNull;
 import dozer.module.Module;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class SettingManager {
         this.settings = new ArrayList<Setting>();
     }
 
-    public void addSetting(@NotNull Setting in) {
+    public void addSetting(Setting in) {
         this.settings.add(in);
     }
 
@@ -34,7 +33,7 @@ public class SettingManager {
         return out;
     }
 
-    public Setting getSettingByName(@NotNull String name, @NotNull Module mod) throws IllegalArgumentException {
+    public Setting getSettingByName(String name, Module mod) throws IllegalArgumentException {
         for (Setting set : getSettings()) {
             if (set.getName().equalsIgnoreCase(name) && set.getParentModule() == mod) {
                 return set;

@@ -201,20 +201,19 @@ public abstract class Minecraft
 
     public static void startMainThread(String s, String s1, String s2) {
         boolean flag = false;
-        String s3 = s;
         Frame frame = new Frame(Dozer.getSingleton().getName() + " " + Dozer.getSingleton().getVersion());
         Canvas canvas = new Canvas();
         frame.setLayout(new BorderLayout());
         frame.add(canvas, "Center");
-        canvas.setPreferredSize(new Dimension(854, 480));
+        canvas.setPreferredSize(new Dimension(1280, 720));
         frame.pack();
         frame.setLocationRelativeTo(null);
-        MinecraftImpl minecraftimpl = new MinecraftImpl(frame, canvas, null, 854, 480, flag, frame);
+        MinecraftImpl minecraftimpl = new MinecraftImpl(frame, canvas, null, 1280, 720, flag, frame);
         Thread thread = new Thread(minecraftimpl, "Minecraft main thread");
         thread.setPriority(10);
         minecraftimpl.minecraftUri = "www.minecraft.net";
-        if (s3 != null && s1 != null) {
-            minecraftimpl.session = new Session(s3, s1);
+        if (s != null && s1 != null) {
+            minecraftimpl.session = new Session(s, s1);
         } else {
             minecraftimpl.session = new Session("Dozer", "");
         }

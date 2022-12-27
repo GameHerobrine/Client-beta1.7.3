@@ -1,7 +1,10 @@
 package dozer.module;
 
+import lombok.Getter;
+
 import java.awt.*;
 
+@Getter
 public enum ModuleCategory {
 
     COMBAT("Combat", new Color(205, 35, 31).getRGB()),
@@ -19,11 +22,4 @@ public enum ModuleCategory {
         this.color = color;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getColor() {
-        return color;
-    }
 }

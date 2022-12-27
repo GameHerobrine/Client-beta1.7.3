@@ -44,8 +44,8 @@ public class Button {
 
     public int drawScreen(int mouseX, int mouseY, int p) {
         Gui.drawRect(panel.x, panel.y + this.y + p, panel.x + this.width, panel.y + this.y + this.height + p, new Color(16, 16, 16, 200).getRGB());
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(binding ? "Listening..." : module.getName(), panel.x + 3, panel.y + this.y + 4 + p, module.getState() ? new Color(255, 255, 255).getRGB() : new Color(150, 150, 150).getRGB());
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(extended ? "-" : "+", panel.x + width - 10, panel.y + this.y + 4 + p, module.getState() ? new Color(255, 255, 255).getRGB() : new Color(150, 150, 150).getRGB());
+        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(binding ? "Listening..." : module.getName(), panel.x + 3, panel.y + this.y + 4 + p, module.isToggled() ? new Color(255, 255, 255).getRGB() : new Color(150, 150, 150).getRGB());
+        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(extended ? "-" : "+", panel.x + width - 10, panel.y + this.y + 4 + p, module.isToggled() ? new Color(255, 255, 255).getRGB() : new Color(150, 150, 150).getRGB());
 
         setHeight = 0;
         extendedHeight = p;

@@ -13,4 +13,6 @@ public @interface ModuleInfo {
     String description();
 
     ModuleCategory category();
+
+    int keyCode() default 0;
 }

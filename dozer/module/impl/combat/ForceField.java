@@ -15,7 +15,7 @@ import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
-@ModuleInfo(name = "ForceField", description = "Attacks entities around you.", category = ModuleCategory.COMBAT)
+@ModuleInfo(name = "ForceField", description = "Attacks entities around you.", category = ModuleCategory.COMBAT, keyCode = Keyboard.KEY_R)
 public class ForceField extends Module {
 
     private final TimerUtil timer = new TimerUtil();
@@ -26,8 +26,6 @@ public class ForceField extends Module {
     public Entity target;
 
     public ForceField() {
-        this.setKeyBind(Keyboard.KEY_R);
-
         this.addSettings(range, aps);
     }
 

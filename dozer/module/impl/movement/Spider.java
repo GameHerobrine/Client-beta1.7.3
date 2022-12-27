@@ -16,7 +16,7 @@ public class Spider extends Module {
 
     @Subscribe
     public void onUpdate(final UpdateEvent event) {
-        if (Dozer.getSingleton().getModuleManager().getModuleByName("Step").getState()) {
+        if (Dozer.getSingleton().getModuleManager().getModuleByName("Step").isToggled()) {
             return;
         }
         if (mc.thePlayer.isCollidedHorizontally) {

@@ -1,7 +1,5 @@
 package dozer.setting;
 
-import com.sun.istack.internal.NotNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +9,7 @@ public class SettingCategory extends Setting {
     private List<Setting> settings = new ArrayList<>();
     private boolean extended;
 
-    public SettingCategory(@NotNull final String name, dependency dependency) {
+    public SettingCategory(final String name, dependency dependency) {
         this.name = name;
         this.dependency = dependency;
     }

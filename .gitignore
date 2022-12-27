@@ -1,0 +1,17 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Maven template
+target/
+build/
+
+*.log
+*.iml
+.idea/
+workspace/
+
+# File-based project format
+*.iws
+
+# For emergency backups
+*.rar
+logs/latest.log
+backup

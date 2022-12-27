@@ -16,7 +16,7 @@ public class Strafe extends Module {
 
     @Subscribe
     public void onUpdate(final UpdateEvent event) {
-        if (Dozer.getSingleton().getModuleManager().getModuleByName("Fly").getState()) {
+        if (Dozer.getSingleton().getModuleManager().getModuleByName("Fly").isToggled()) {
             return;
         }
         if (mc.thePlayer.movementInput.moveForward != 0 || mc.thePlayer.movementInput.moveStrafe != 0) {

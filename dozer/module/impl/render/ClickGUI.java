@@ -5,12 +5,8 @@ import dozer.module.ModuleCategory;
 import dozer.module.ModuleInfo;
 import org.lwjgl.input.Keyboard;
 
-@ModuleInfo(name = "ClickGUI", description = "Opens the ClickGUI.", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "ClickGUI", description = "Opens the ClickGUI.", category = ModuleCategory.RENDER, keyCode = Keyboard.KEY_RSHIFT)
 public class ClickGUI extends Module {
-
-    public ClickGUI() {
-        this.setKeyBind(Keyboard.KEY_RSHIFT);
-    }
 
     @Override
     public void onEnable() {
