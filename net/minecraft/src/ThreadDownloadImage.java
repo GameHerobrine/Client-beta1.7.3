@@ -1,6 +1,6 @@
 // Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
+// Decompiler options: packimports(3) braces deadcode
 
 package net.minecraft.src;
 
@@ -13,36 +13,38 @@ import java.net.URL;
 
 class ThreadDownloadImage extends Thread {
 
-    final String location; /* synthetic field */
-    final ImageBuffer buffer; /* synthetic field */
-    final ThreadDownloadImageData imageData; /* synthetic field */
-    ThreadDownloadImage(ThreadDownloadImageData threaddownloadimagedata, String s, ImageBuffer imagebuffer) {
-//        super();
-        imageData = threaddownloadimagedata;
-        location = s;
-        buffer = imagebuffer;
-    }
+  final String location; /* synthetic field */
+  final ImageBuffer buffer; /* synthetic field */
+  final ThreadDownloadImageData imageData; /* synthetic field */
 
-    public void run() {
-        HttpURLConnection httpurlconnection = null;
-        try {
-            URL url = new URL(location);
-            httpurlconnection = (HttpURLConnection) url.openConnection();
-            httpurlconnection.setDoInput(true);
-            httpurlconnection.setDoOutput(false);
-            httpurlconnection.connect();
-            if (httpurlconnection.getResponseCode() / 100 == 4) {
-                return;
-            }
-            if (buffer == null) {
-                imageData.image = ImageIO.read(httpurlconnection.getInputStream());
-            } else {
-                imageData.image = buffer.parseUserSkin(ImageIO.read(httpurlconnection.getInputStream()));
-            }
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        } finally {
-            httpurlconnection.disconnect();
-        }
+  ThreadDownloadImage(
+      ThreadDownloadImageData threaddownloadimagedata, String s, ImageBuffer imagebuffer) {
+    //        super();
+    imageData = threaddownloadimagedata;
+    location = s;
+    buffer = imagebuffer;
+  }
+
+  public void run() {
+    HttpURLConnection httpurlconnection = null;
+    try {
+      URL url = new URL(location);
+      httpurlconnection = (HttpURLConnection) url.openConnection();
+      httpurlconnection.setDoInput(true);
+      httpurlconnection.setDoOutput(false);
+      httpurlconnection.connect();
+      if (httpurlconnection.getResponseCode() / 100 == 4) {
+        return;
+      }
+      if (buffer == null) {
+        imageData.image = ImageIO.read(httpurlconnection.getInputStream());
+      } else {
+        imageData.image = buffer.parseUserSkin(ImageIO.read(httpurlconnection.getInputStream()));
+      }
+    } catch (Exception exception) {
+      exception.printStackTrace();
+    } finally {
+      httpurlconnection.disconnect();
     }
+  }
 }

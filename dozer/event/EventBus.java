@@ -27,7 +27,8 @@ public class EventBus {
 
     public void unregister(Object object) {
         if (!eventObjects.contains(object))
-            throw new RuntimeException(String.format("Class: %s was not registered!", object));
+            return;
+//            throw new RuntimeException(String.format("Class: %s was not registered!", object));
 
         eventObjects.remove(object);
         updateMethods();

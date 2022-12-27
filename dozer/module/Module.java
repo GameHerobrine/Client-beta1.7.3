@@ -30,8 +30,7 @@ public class Module implements MinecraftUtil {
   }
 
   public void addSettings(Setting... setting) {
-    this.settings.addAll(Arrays.asList(setting));
-    this.settings.forEach(s -> Dozer.getSingleton().getSettingManager().addSetting(s));
+    Arrays.asList(setting).forEach(Dozer.getSingleton().getSettingManager()::addSetting);
   }
 
   public void onEnable() {}

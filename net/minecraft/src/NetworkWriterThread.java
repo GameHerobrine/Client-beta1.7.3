@@ -1,6 +1,6 @@
 // Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
+// Decompiler options: packimports(3) braces deadcode
 
 package net.minecraft.src;
 
@@ -11,42 +11,43 @@ import java.io.IOException;
 
 class NetworkWriterThread extends Thread {
 
-    final NetworkManager netManager; /* synthetic field */
+  final NetworkManager netManager; /* synthetic field */
 
-    NetworkWriterThread(NetworkManager networkmanager, String s) {
-        super(s);
-        netManager = networkmanager;
+  NetworkWriterThread(NetworkManager networkmanager, String s) {
+    super(s);
+    netManager = networkmanager;
+  }
+
+  public void run() {
+    synchronized (NetworkManager.threadSyncObject) {
+      NetworkManager.numWriteThreads++;
     }
-
-    public void run() {
-        synchronized (NetworkManager.threadSyncObject) {
-            NetworkManager.numWriteThreads++;
+    try {
+      do {
+        if (!NetworkManager.isRunning(netManager)) {
+          break;
+        }
+        while (NetworkManager.sendNetworkPacket(netManager))
+          ;
+        try {
+          sleep(100L);
+        } catch (InterruptedException interruptedexception) {
         }
         try {
-            do {
-                if (!NetworkManager.isRunning(netManager)) {
-                    break;
-                }
-                while (NetworkManager.sendNetworkPacket(netManager)) ;
-                try {
-                    sleep(100L);
-                } catch (InterruptedException interruptedexception) {
-                }
-                try {
-                    if (NetworkManager.func_28140_f(netManager) != null) {
-                        NetworkManager.func_28140_f(netManager).flush();
-                    }
-                } catch (IOException ioexception) {
-                    if (!NetworkManager.func_28138_e(netManager)) {
-                        NetworkManager.func_30005_a(netManager, ioexception);
-                    }
-                    ioexception.printStackTrace();
-                }
-            } while (true);
-        } finally {
-            synchronized (NetworkManager.threadSyncObject) {
-                NetworkManager.numWriteThreads--;
-            }
+          if (NetworkManager.func_28140_f(netManager) != null) {
+            NetworkManager.func_28140_f(netManager).flush();
+          }
+        } catch (IOException ioexception) {
+          if (!NetworkManager.func_28138_e(netManager)) {
+            NetworkManager.func_30005_a(netManager, ioexception);
+          }
+          ioexception.printStackTrace();
         }
+      } while (true);
+    } finally {
+      synchronized (NetworkManager.threadSyncObject) {
+        NetworkManager.numWriteThreads--;
+      }
     }
+  }
 }

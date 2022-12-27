@@ -1,6 +1,6 @@
 package dozer.event.impl;
 
-import net.minecraft.src.Packet;
+import net.minecraft.src.network.packets.Packet;
 
 /**
  * @author Shae

@@ -6,7 +6,7 @@ import dozer.module.Module;
 import dozer.module.ModuleCategory;
 import dozer.module.ModuleInfo;
 import dozer.util.misc.TimerUtil;
-import net.minecraft.src.Packet10Flying;
+import net.minecraft.src.network.packets.Packet10Flying;
 
 @ModuleInfo(name = "NoFallDamage", description = "Prevents you from taking fall damage.", category = ModuleCategory.PLAYER)
 public class NoFallDamage extends Module {

@@ -7,7 +7,10 @@ import dozer.module.ModuleCategory;
 import dozer.module.ModuleInfo;
 import dozer.util.player.MovementUtil;
 import dozer.event.impl.PacketEvent;
-import net.minecraft.src.*;
+import net.minecraft.src.network.packets.Packet0KeepAlive;
+import net.minecraft.src.network.packets.Packet11PlayerPosition;
+import net.minecraft.src.network.packets.Packet12PlayerLook;
+import net.minecraft.src.network.packets.Packet13PlayerLookMove;
 import org.lwjgl.input.Keyboard;
 
 @ModuleInfo(name = "FreeCam", description = "Allows you to move out of your body.", category = ModuleCategory.MISC)

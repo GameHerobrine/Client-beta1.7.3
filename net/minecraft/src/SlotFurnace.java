@@ -1,35 +1,38 @@
 // Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
+// Decompiler options: packimports(3) braces deadcode
 
 package net.minecraft.src;
 
-
 // Referenced classes of package net.minecraft.src:
-//            Slot, EntityPlayer, ItemStack, Item, 
+//            Slot, EntityPlayer, ItemStack, Item,
 //            AchievementList, IInventory
+
+import net.minecraft.src.entity.EntityPlayer;
+import net.minecraft.src.item.Item;
+import net.minecraft.src.item.ItemStack;
 
 public class SlotFurnace extends Slot {
 
-    private EntityPlayer thePlayer;
+  private EntityPlayer thePlayer;
 
-    public SlotFurnace(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k) {
-        super(iinventory, i, j, k);
-        thePlayer = entityplayer;
-    }
+  public SlotFurnace(EntityPlayer entityplayer, IInventory iinventory, int i, int j, int k) {
+    super(iinventory, i, j, k);
+    thePlayer = entityplayer;
+  }
 
-    public boolean isItemValid(ItemStack itemstack) {
-        return false;
-    }
+  public boolean isItemValid(ItemStack itemstack) {
+    return false;
+  }
 
-    public void onPickupFromSlot(ItemStack itemstack) {
-        itemstack.onCrafting(thePlayer.worldObj, thePlayer);
-        if (itemstack.itemID == Item.ingotIron.shiftedIndex) {
-            thePlayer.addStat(AchievementList.acquireIron, 1);
-        }
-        if (itemstack.itemID == Item.fishCooked.shiftedIndex) {
-            thePlayer.addStat(AchievementList.cookFish, 1);
-        }
-        super.onPickupFromSlot(itemstack);
+  public void onPickupFromSlot(ItemStack itemstack) {
+    itemstack.onCrafting(thePlayer.worldObj, thePlayer);
+    if (itemstack.itemID == Item.ingotIron.shiftedIndex) {
+      thePlayer.addStat(AchievementList.acquireIron, 1);
     }
+    if (itemstack.itemID == Item.fishCooked.shiftedIndex) {
+      thePlayer.addStat(AchievementList.cookFish, 1);
+    }
+    super.onPickupFromSlot(itemstack);
+  }
 }

@@ -4,7 +4,7 @@ import dozer.setting.Setting;
 import dozer.setting.impl.SettingBoolean;
 import dozer.ui.impl.Button;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Gui;
+import net.minecraft.src.gui.Gui;
 
 import java.awt.*;
 

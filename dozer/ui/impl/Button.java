@@ -1,14 +1,14 @@
 package dozer.ui.impl;
 
+import dozer.Dozer;
 import dozer.module.Module;
-import dozer.setting.Setting;
 import dozer.setting.SettingType;
 import dozer.ui.impl.settings.CheckBox;
 import dozer.ui.impl.settings.Mode;
 import dozer.ui.impl.settings.SettingComponent;
 import dozer.ui.impl.settings.Slider;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.Gui;
+import net.minecraft.src.gui.Gui;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -31,15 +31,11 @@ public class Button {
         this.y = y;
         this.module = module;
         this.panel = panel;
-        for (Setting setting : module.getSettings()) {
-            if (setting.getSettingType() == SettingType.BOOLEAN) {
-                settingComponents.add(new CheckBox(setting, this));
-            } else if (setting.getSettingType() == SettingType.MODE) {
-                settingComponents.add(new Mode(setting, this));
-            } else if (setting.getSettingType() == SettingType.NUMBER) {
-                settingComponents.add(new Slider(setting, this));
-            }
-        }
+        Dozer.getSingleton().getSettingManager().getSettingsByMod(module).forEach(setting -> {
+            if(setting.getSettingType() == SettingType.BOOLEAN) settingComponents.add(new CheckBox(setting, this));
+            else if (setting.getSettingType() == SettingType.MODE) settingComponents.add(new Mode(setting, this));
+            else if (setting.getSettingType() == SettingType.NUMBER)  settingComponents.add(new Slider(setting, this));
+        });
     }
 
     public int drawScreen(int mouseX, int mouseY, int p) {

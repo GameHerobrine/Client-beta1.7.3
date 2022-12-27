@@ -9,6 +9,7 @@ import dozer.module.ModuleInfo;
 import dozer.util.chat.ChatColorUtil;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.ScaledResolution;
+import net.minecraft.src.gui.GuiChat;
 
 import java.util.Comparator;
 import java.util.List;
@@ -60,7 +61,7 @@ public class HUD extends Module {
     }
 
     public boolean isChatOpen() {
-        return mc.currentScreen instanceof net.minecraft.src.GuiChat;
+        return mc.currentScreen instanceof GuiChat;
     }
 
 }

@@ -7,10 +7,10 @@ import dozer.module.ModuleCategory;
 import dozer.module.ModuleInfo;
 import dozer.setting.impl.SettingNumber;
 import dozer.util.misc.TimerUtil;
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityAnimal;
-import net.minecraft.src.EntityMob;
-import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.entity.Entity;
+import net.minecraft.src.entity.EntityAnimal;
+import net.minecraft.src.entity.EntityMob;
+import net.minecraft.src.entity.EntityPlayer;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;

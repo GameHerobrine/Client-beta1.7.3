@@ -3,7 +3,7 @@ package dozer.ui;
 import dozer.module.ModuleCategory;
 import dozer.ui.impl.Button;
 import dozer.ui.impl.Panel;
-import net.minecraft.src.GuiScreen;
+import net.minecraft.src.gui.GuiScreen;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class ClickGUI extends GuiScreen {
     protected void keyTyped(char c, int i) {
         if (i == 1 && !isBinding()) {
             mc.displayGuiScreen(null);
-            mc.setIngameFocus();
+            mc.focusDisplay();
         }
         for (Panel panel : panels) {
             panel.keyTyped(c, i);

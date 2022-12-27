@@ -1,6 +1,6 @@
 // Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
+// Decompiler options: packimports(3) braces deadcode
 
 package net.minecraft.src;
 
@@ -16,38 +16,39 @@ import java.nio.IntBuffer;
 
 public class MouseHelper {
 
-    public int deltaX;
-    public int deltaY;
-    private Component field_1117_c;
-    private Cursor cursor;
-    private int field_1115_e;
-    public MouseHelper(Component component) {
-        field_1115_e = 10;
-        field_1117_c = component;
-        IntBuffer intbuffer = GLAllocation.createDirectIntBuffer(1);
-        intbuffer.put(0);
-        intbuffer.flip();
-        IntBuffer intbuffer1 = GLAllocation.createDirectIntBuffer(1024);
-        try {
-            cursor = new Cursor(32, 32, 16, 16, 1, intbuffer1, intbuffer);
-        } catch (LWJGLException lwjglexception) {
-            lwjglexception.printStackTrace();
-        }
-    }
+  public int deltaX;
+  public int deltaY;
+  private Component field_1117_c;
+  private Cursor cursor;
+  private int field_1115_e;
 
-    public void grabMouseCursor() {
-        Mouse.setGrabbed(true);
-        deltaX = 0;
-        deltaY = 0;
+  public MouseHelper(Component component) {
+    field_1115_e = 10;
+    field_1117_c = component;
+    IntBuffer intbuffer = GLAllocation.createDirectIntBuffer(1);
+    intbuffer.put(0);
+    intbuffer.flip();
+    IntBuffer intbuffer1 = GLAllocation.createDirectIntBuffer(1024);
+    try {
+      cursor = new Cursor(32, 32, 16, 16, 1, intbuffer1, intbuffer);
+    } catch (LWJGLException lwjglexception) {
+      lwjglexception.printStackTrace();
     }
+  }
 
-    public void ungrabMouseCursor() {
-        Mouse.setCursorPosition(field_1117_c.getWidth() / 2, field_1117_c.getHeight() / 2);
-        Mouse.setGrabbed(false);
-    }
+  public void grabMouseCursor() {
+    Mouse.setGrabbed(true);
+    deltaX = 0;
+    deltaY = 0;
+  }
 
-    public void mouseXYChange() {
-        deltaX = Mouse.getDX();
-        deltaY = Mouse.getDY();
-    }
+  public void ungrabMouseCursor() {
+    Mouse.setCursorPosition(field_1117_c.getWidth() / 2, field_1117_c.getHeight() / 2);
+    Mouse.setGrabbed(false);
+  }
+
+  public void mouseXYChange() {
+    deltaX = Mouse.getDX();
+    deltaY = Mouse.getDY();
+  }
 }

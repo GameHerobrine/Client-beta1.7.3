@@ -21,7 +21,7 @@ You can change this by right-clicking the module you wish to change the key bind
 
 ### Registering the event
 
-1. Head to the class and method you want to register the event to e.g `net.minecraft.src.EntityPlayer.java:54` (For the
+1. Head to the class and method you want to register the event to e.g `net.minecraft.src.entity.EntityPlayer.java:54` (For the
    onUpdate event
 2. Add the following line of code: `Dozer.getSingleton().getEventBus().post(new EventName());`
 
@@ -61,12 +61,14 @@ public class EventName {
 ```java
 package net.minecraft.src;
 
+import net.minecraft.src.entity.EntityLiving;
+
 public class EntityPlayer extends EntityLiving {
-    
-    public void onUpdate() {
-        Dozer.getSingleton().getEventBus().post(new EventName(1));
-    }
-    
+
+  public void onUpdate() {
+    Dozer.getSingleton().getEventBus().post(new EventName(1));
+  }
+
 }
 ```
 
@@ -75,14 +77,14 @@ or
 ```java
 package net.minecraft.src;
 
-import java.awt.*;
+import net.minecraft.src.entity.EntityLiving;
 
 public class EntityPlayer extends EntityLiving {
 
-    public void onUpdate() {
-        EventName event = new EventName(1);
-        Dozer.getSingleton().getEventBus().post(event);
-    }
+  public void onUpdate() {
+    EventName event = new EventName(1);
+    Dozer.getSingleton().getEventBus().post(event);
+  }
 
 }
 ```

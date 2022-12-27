@@ -1,6 +1,6 @@
 // Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
 // Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode 
+// Decompiler options: packimports(3) braces deadcode
 
 package net.minecraft.src;
 
@@ -14,15 +14,14 @@ import java.io.InputStream;
 
 public class CodecMus extends CodecJOrbis {
 
-    public CodecMus() {
-    }
+  public CodecMus() {}
 
-    protected InputStream openInputStream() {
-        try {
-            return new MusInputStream(this, url, urlConnection.getInputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+  protected InputStream openInputStream() {
+    try {
+      return new MusInputStream(this, url, urlConnection.getInputStream());
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
     }
+  }
 }
