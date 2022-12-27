@@ -31,7 +31,6 @@ public class Dozer {
     moduleManager.init();
     commandManager.init();
 
-    Minecraft.getMinecraft().session = new Session("SignamKid", "-");
     System.out.println("DozerHack initialized!");
   }
 }
