@@ -43,9 +43,9 @@ public class BlockRedstoneTorch extends BlockTorch {
     int l = 0;
     for (int i1 = 0; i1 < torchUpdates.size(); i1++) {
       RedstoneUpdateInfo redstoneupdateinfo = (RedstoneUpdateInfo) torchUpdates.get(i1);
-      if (redstoneupdateinfo.x() == i
-          && redstoneupdateinfo.y() == j
-          && redstoneupdateinfo.z() == k
+      if (redstoneupdateinfo.x == i
+          && redstoneupdateinfo.y == j
+          && redstoneupdateinfo.z == k
           && ++l >= 8) {
         return true;
       }
@@ -124,7 +124,7 @@ public class BlockRedstoneTorch extends BlockTorch {
     boolean flag = func_30002_h(world, i, j, k);
     for (;
         torchUpdates.size() > 0
-            && world.getWorldTime() - ((RedstoneUpdateInfo) torchUpdates.get(0)).updateTime() > 100L;
+            && world.getWorldTime() - ((RedstoneUpdateInfo) torchUpdates.get(0)).updateTime > 100L;
         torchUpdates.remove(0)) {}
     if (torchActive) {
       if (flag) {

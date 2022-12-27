@@ -23,6 +23,7 @@ public class ModuleManager {
     System.out.println("Initializing modules...");
 
     new Reflections().getTypesAnnotatedWith(ModuleInfo.class).forEach(this::addModule);
+
     Dozer.getSingleton().getEventBus().register(this);
 
     System.out.printf(
