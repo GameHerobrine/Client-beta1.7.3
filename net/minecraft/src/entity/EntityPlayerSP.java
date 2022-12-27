@@ -4,7 +4,6 @@
 
 package net.minecraft.src.entity;
 
-import dozer.event.impl.ChatEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.gui.*;
@@ -197,8 +196,7 @@ public class EntityPlayerSP extends EntityPlayer {
   public void func_6420_o() {}
 
   public void addChatMessage(String s) {
-    ChatEvent event = new ChatEvent(s);
-    if (!event.isCancelled()) mc.ingameGUI.addChatMessageTranslate(s);
+    mc.ingameGUI.addChatMessageTranslate(s);
   }
 
   public void addStat(StatBase statbase, int i) {

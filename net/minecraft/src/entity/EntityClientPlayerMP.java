@@ -4,6 +4,8 @@
 
 package net.minecraft.src.entity;
 
+import dozer.Dozer;
+import dozer.event.impl.ChatEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.network.packets.*;
@@ -133,6 +135,12 @@ public class EntityClientPlayerMP extends EntityPlayerSP {
   protected void joinEntityItemWithWorld(EntityItem entityitem) {}
 
   public void sendChatMessage(String s) {
+
+    ChatEvent chatEvent = new ChatEvent(s);
+    Dozer.getSingleton().getEventBus().post(chatEvent);
+    if(chatEvent.isCancelled())
+      return;
+
     sendQueue.addToSendQueue(new Packet3Chat(s));
   }
 

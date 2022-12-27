@@ -1044,8 +1044,7 @@ public abstract class Minecraft implements Runnable {
               if (Keyboard.getEventKey() == gameSettings.keyBindDrop.keyCode) {
                 thePlayer.dropCurrentItem();
               }
-              if (isMultiplayerWorld()
-                  && Keyboard.getEventKey() == gameSettings.keyBindChat.keyCode) {
+              if (Keyboard.getEventKey() == gameSettings.keyBindChat.keyCode) {
                 displayGuiScreen(new GuiChat());
               }
             }
