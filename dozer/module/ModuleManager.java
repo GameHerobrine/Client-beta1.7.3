@@ -3,9 +3,12 @@ package dozer.module;
 import dozer.Dozer;
 import dozer.event.Subscribe;
 import dozer.event.impl.KeyPressEvent;
+import dozer.module.impl.render.ClickGUI;
 import lombok.SneakyThrows;
 import org.reflections.Reflections;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
@@ -22,7 +25,7 @@ public class ModuleManager {
   public void init() {
     System.out.println("Initializing modules...");
 
-    new Reflections().getTypesAnnotatedWith(ModuleInfo.class).forEach(this::addModule);
+    new Reflections("dozer.module.impl").getTypesAnnotatedWith(ModuleInfo.class).forEach(this::addModule);
 
     Dozer.getSingleton().getEventBus().register(this);
 
@@ -32,6 +35,8 @@ public class ModuleManager {
         moduleList.stream().map(Module::getName).collect(Collectors.joining(", ")));
     System.out.println("Modules initialized.");
   }
+
+
 
   @SneakyThrows
   private void addModule(Class<?> clazz) {

@@ -19,10 +19,8 @@ public class CommandManager {
     public void init() {
         System.out.println("Initializing commands...");
 
-        Reflections reflections = new Reflections();
-
         // Get all classes that use annotations of CommandInfo.
-        reflections.getTypesAnnotatedWith(CommandInfo.class).forEach(this::addCommand);
+        new Reflections("dozer.command.impl").getTypesAnnotatedWith(CommandInfo.class).forEach(this::addCommand);
 
         Dozer.getSingleton().getEventBus().register(this);
 
