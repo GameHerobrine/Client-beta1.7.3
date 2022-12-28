@@ -1,34 +1,43 @@
 package dozer.setting;
 
-import dozer.module.Module;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
+
+import java.lang.reflect.Field;
 
 @Getter
-@Setter
-public class Setting<T> {
+public abstract class Setting<A, V> {
 
-    private T value;
-    protected String name;
-    protected Module parentModule;
-    protected dependency dependency;
+  private final String name;
+  private final String description;
+  private final Field field;
+  private final A annotation;
+  private final Object object;
+  @Setter private Setting<?, ?> parent;
+  @Setter private String parentMode;
+  @Setter private String group;
 
-    public Setting(String name, dependency dependency, T value) {
-        this.name = name;
-        this.dependency = dependency;
-        this.value = value;
-    }
+  public Setting(Field field, Object object) {
+    this.field = field;
+    this.name = field.getAnnotation(Serialize.class).name();
+    this.description = field.getAnnotation(Serialize.class).desc();
+    this.annotation = (A) field.getAnnotations()[1];
+    this.object = object;
+  }
 
-    public boolean isParentActive() {
-        if (this.dependency == null) {
-            return true;
-        }
-        return this.dependency.check();
-    }
+  @SneakyThrows
+  protected void setFieldValue(V value) {
+    this.field.set(this.object, value);
+  }
 
-    @FunctionalInterface
-    public interface dependency {
-        boolean check();
-    }
+  @SneakyThrows
+  protected V getFieldValue() {
+    return (V) this.field.get(this.object);
+  }
+
+  public abstract V getValue();
+  public abstract void setValue(V t);
+  public abstract void loadSetting(String s);
 
 }

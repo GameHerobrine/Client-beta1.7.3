@@ -5,9 +5,9 @@ import dozer.event.impl.UpdateEvent;
 import dozer.module.Module;
 import dozer.module.ModuleCategory;
 import dozer.module.ModuleInfo;
-import dozer.setting.impl.SettingBoolean;
+import dozer.setting.Serialize;
+import dozer.setting.annotation.Slider;
 import dozer.setting.impl.SettingMode;
-import dozer.setting.impl.SettingNumber;
 import dozer.util.misc.TimerUtil;
 import net.minecraft.src.entity.Entity;
 import net.minecraft.src.entity.EntityAnimal;
@@ -16,52 +16,39 @@ import net.minecraft.src.entity.EntityPlayer;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
+import java.util.function.Predicate;
 
-@ModuleInfo(name = "ForceField", description = "Attacks entities around you.", category = ModuleCategory.COMBAT, keyCode = Keyboard.KEY_R)
+@ModuleInfo(
+    name = "ForceField",
+    description = "Attacks entities around you.",
+    category = ModuleCategory.COMBAT,
+    keyCode = Keyboard.KEY_R)
 public class ForceField extends Module {
 
-    private final TimerUtil timer = new TimerUtil();
+  private final TimerUtil timer = new TimerUtil();
+  private final Predicate<Entity> entityPredicate = entity ->
+      entity != mc.thePlayer &&
+      entity instanceof EntityPlayer;
 
+  @Serialize(name = "range")
+  @Slider(min = 3, max = 8, increment = 0.1)
+  public double range = 4.2;
 
-    public enum Values {
-        VALUE1,
-        VALUE2,
-        VALUE3
+  @Serialize(name = "aps")
+  @Slider(min = 4, max = 20, increment = 0.1)
+  public double aps = 12;
+
+  @Subscribe
+  public void onUpdate(final UpdateEvent event) {
+    if(!event.isPre()) return;
+    final Entity target = mc.theWorld.loadedEntityList.stream().filter(entityPredicate).findFirst().orElse(null);
+    if(target == null) return;
+
+    if(timer.hasReached((long) aps * 50)) {
+      mc.thePlayer.attackTargetEntityWithCurrentItem(target);
     }
-
-    private final SettingNumber range = numberSetting("Range", null, 6, 0, 6, 0.1);
-    private final SettingNumber aps = numberSetting("APS", null, 10, 1, 20, 1);
-    private final SettingBoolean players = boolSetting("Players", null, true);
-    private final SettingBoolean mobs = boolSetting("Mobs", null, true);
-    private final SettingBoolean animals = boolSetting("Animals", null, false);
-    private final SettingMode<?> testSetting = modeSetting("Test", null, Values.VALUE1, Values.values());
+  }
 
 
-    @Subscribe
-    public void onUpdate(final UpdateEvent event) {
-        world().ifPresent(world -> {
-            List<Entity> entityList = mc.theWorld.loadedEntityList;
-
-            entityList.forEach(entity -> {
-                boolean check = isEntityValid(entity) && entity != mc.thePlayer && mc.thePlayer.getDistanceToEntity(entity) <= range.getValue();
-                if (check && timer.hasReached((long) (1000L / aps.getValue()))) {
-                    mc.playerController.attackEntity(mc.thePlayer, entity);
-                    timer.reset();
-                }
-            });
-
-
-        });
-    }
-
-
-
-
-    public boolean isEntityValid(Entity entity) {
-        return (entity instanceof EntityAnimal && animals.getValue()) ||
-                (entity instanceof EntityMob && mobs.getValue()) ||
-                (entity instanceof EntityPlayer) && players.getValue();
-
-    }
 
 }

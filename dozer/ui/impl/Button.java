@@ -1,9 +1,10 @@
 package dozer.ui.impl;
 
+import dozer.Dozer;
 import dozer.module.Module;
-import dozer.setting.impl.SettingBoolean;
+import dozer.setting.impl.SettingCheckBox;
 import dozer.setting.impl.SettingMode;
-import dozer.setting.impl.SettingNumber;
+import dozer.setting.impl.SettingSlider;
 import dozer.ui.impl.settings.CheckBox;
 import dozer.ui.impl.settings.Mode;
 import dozer.ui.impl.settings.SettingComponent;
@@ -33,10 +34,10 @@ public class Button {
         this.module = module;
         this.panel = panel;
 
-        module.getSettingManager().getSettings().forEach(setting -> {
-            if(setting instanceof SettingBoolean) settingComponents.add(new CheckBox((SettingBoolean) setting, this));
-            if(setting instanceof SettingMode<?>) settingComponents.add(new Mode((SettingMode<?>) setting, this));
-            if(setting instanceof SettingNumber) settingComponents.add(new Slider((SettingNumber) setting, this));
+        Dozer.getSingleton().getSettingManager().getSettingsFromType(module.getClass()).forEach(setting -> {
+            if(setting instanceof SettingCheckBox settingCheckBox) settingComponents.add(new CheckBox(settingCheckBox, this));
+            if(setting instanceof SettingMode settingMode) settingComponents.add(new Mode(settingMode, this));
+            if(setting instanceof SettingSlider settingSlider) settingComponents.add(new Slider(settingSlider, this));
         });
     }
 

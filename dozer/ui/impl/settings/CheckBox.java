@@ -1,6 +1,6 @@
 package dozer.ui.impl.settings;
 
-import dozer.setting.impl.SettingBoolean;
+import dozer.setting.impl.SettingCheckBox;
 import dozer.ui.impl.Button;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.gui.Gui;
@@ -11,9 +11,9 @@ public class CheckBox extends SettingComponent {
 
     private double x;
     private double y;
-    private final SettingBoolean booleanSetting;
+    private final SettingCheckBox booleanSetting;
 
-    public CheckBox(SettingBoolean booleanSetting, Button parent) {
+    public CheckBox(SettingCheckBox booleanSetting, Button parent) {
         super(booleanSetting, parent);
         this.booleanSetting = booleanSetting;
     }

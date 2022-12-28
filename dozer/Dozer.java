@@ -3,6 +3,7 @@ package dozer;
 import dozer.command.CommandManager;
 import dozer.event.EventBus;
 import dozer.module.ModuleManager;
+import dozer.setting.SettingManager;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +15,9 @@ public class Dozer {
   private final String[] authors = {"KillDozer", "Signam", "Shae", "Eternal"};
 
   @Setter
-  @Getter
   private String prefix = ".";
 
+  private final SettingManager settingManager = new SettingManager();
   private final ModuleManager moduleManager = new ModuleManager();
   private final CommandManager commandManager = new CommandManager();
   private final EventBus eventBus = new EventBus();
@@ -26,6 +27,7 @@ public class Dozer {
 
     moduleManager.init();
     commandManager.init();
+    settingManager.init();
 
     System.out.println("DozerHack initialized!");
   }
