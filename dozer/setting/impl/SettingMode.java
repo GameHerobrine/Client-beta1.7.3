@@ -1,73 +1,29 @@
 package dozer.setting.impl;
 
-import dozer.module.Module;
 import dozer.setting.Setting;
-import dozer.setting.SettingType;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Arrays;
-import java.util.List;
+@Getter
+@Setter
+public class SettingMode<T extends Enum<?>> extends Setting<T> {
 
-public class SettingMode extends Setting {
+    public T[] values;
 
-    private final List<String> options;
-    private String value;
 
-    public SettingMode(String name, Module moduleParent, Setting.dependency dependency, String defaultValue, String... options) {
-        this.name = name;
-        this.parentModule = moduleParent;
-        this.dependency = dependency;
-        this.value = defaultValue;
-        this.options = Arrays.asList(options);
-        this.settingType = SettingType.MODE;
-        this.category = null;
+    public SettingMode(String name, Setting.dependency dependency, T value, T[] values) {
+        super(name, dependency, value);
+        this.values = values;
     }
 
-    public String getMode() {
-        return value;
+    public Enum<?> nextValue(Enum<?> value) {
+        Enum<?>[] values = value.getDeclaringClass().getEnumConstants();
+        return values.length - 1 == value.ordinal() ? values[0] : values[value.ordinal() + 1];
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public List<String> getOptions() {
-        return options;
-    }
-
-    public int getIndexByMode(String mode) {
-        int index = 0;
-        for (String s : options) {
-            if (s.equals(mode)) {
-                return index;
-            }
-            index++;
-        }
-        return 0;
-    }
-
-    public void cycle(String type) {
-        int index = this.getIndexByMode(this.getMode());
-
-        if (type.equalsIgnoreCase("up")) {
-            index = index + 1;
-
-            if (index > this.getOptions().size() - 1) {
-                index = 0;
-            }
-            if (index < 0) {
-                index = this.getOptions().size() - 1;
-            }
-        } else if (type.equalsIgnoreCase("down")) {
-            index = index - 1;
-
-            if (index > this.getOptions().size() - 1) {
-                index = 0;
-            }
-            if (index < 0) {
-                index = this.getOptions().size() - 1;
-            }
-        }
-        this.setValue(this.getOptions().get(index));
+    public Enum<?> previousValue(Enum<?> value) {
+        Enum<?>[] values = value.getDeclaringClass().getEnumConstants();
+        return values[0] == value ? values[values.length - 1] : values[value.ordinal() - 1];
     }
 
 }

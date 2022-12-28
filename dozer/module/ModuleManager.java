@@ -3,12 +3,9 @@ package dozer.module;
 import dozer.Dozer;
 import dozer.event.Subscribe;
 import dozer.event.impl.KeyPressEvent;
-import dozer.module.impl.render.ClickGUI;
 import lombok.SneakyThrows;
 import org.reflections.Reflections;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;

@@ -3,11 +3,8 @@ package dozer;
 import dozer.command.CommandManager;
 import dozer.event.EventBus;
 import dozer.module.ModuleManager;
-import dozer.setting.SettingManager;
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.client.Minecraft;
-import net.minecraft.src.Session;
 
 @Getter
 public class Dozer {
@@ -20,7 +17,6 @@ public class Dozer {
   @Getter
   private String prefix = ".";
 
-  private final SettingManager settingManager = new SettingManager();
   private final ModuleManager moduleManager = new ModuleManager();
   private final CommandManager commandManager = new CommandManager();
   private final EventBus eventBus = new EventBus();

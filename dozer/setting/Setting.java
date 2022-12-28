@@ -1,74 +1,22 @@
 package dozer.setting;
 
 import dozer.module.Module;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Setting {
+@Getter
+@Setter
+public class Setting<T> {
 
-    public boolean focused;
+    private T value;
     protected String name;
     protected Module parentModule;
     protected dependency dependency;
-    protected SettingType settingType;
-    protected SettingCategory category;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Setting(String name, dependency dependency, T value) {
         this.name = name;
-    }
-
-    public Setting.dependency getDependency() {
-        return dependency;
-    }
-
-    public void setDependency(Setting.dependency dependency) {
         this.dependency = dependency;
-    }
-
-    public SettingType getSettingType() {
-        return settingType;
-    }
-
-    public void setSettingType(SettingType settingType) {
-        this.settingType = settingType;
-    }
-
-    public Module getParentModule() {
-        return parentModule;
-    }
-
-    public void setParentModule(Module parentModule) {
-        this.parentModule = parentModule;
-    }
-
-    public boolean isMode() {
-        return this.settingType == SettingType.MODE;
-    }
-
-    public boolean isNumber() {
-        return this.settingType == SettingType.NUMBER;
-    }
-
-    public boolean isBoolean() {
-        return this.settingType == SettingType.BOOLEAN;
-    }
-
-    public SettingCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(SettingCategory category) {
-        this.category = category;
-    }
-
-    public boolean isFocused() {
-        return focused;
-    }
-
-    public void setFocused(boolean focused) {
-        this.focused = focused;
+        this.value = value;
     }
 
     public boolean isParentActive() {

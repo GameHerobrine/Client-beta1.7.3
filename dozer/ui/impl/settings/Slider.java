@@ -1,6 +1,5 @@
 package dozer.ui.impl.settings;
 
-import dozer.setting.Setting;
 import dozer.setting.impl.SettingNumber;
 import dozer.ui.impl.Button;
 import net.minecraft.client.Minecraft;
@@ -14,13 +13,13 @@ public class Slider extends SettingComponent {
 
     private double x;
     private double y;
-    private SettingNumber numberSetting;
+    private final SettingNumber numberSetting;
 
     private boolean dragging = false;
 
-    public Slider(Setting s, Button parent) {
-        super(s, parent);
-        this.numberSetting = (SettingNumber) s;
+    public Slider(SettingNumber numberSetting, Button parent) {
+        super(numberSetting, parent);
+        this.numberSetting = numberSetting;
     }
 
     @Override

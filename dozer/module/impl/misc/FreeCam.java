@@ -1,12 +1,12 @@
 package dozer.module.impl.misc;
 
 import dozer.event.Subscribe;
+import dozer.event.impl.PacketEvent;
 import dozer.event.impl.UpdateEvent;
 import dozer.module.Module;
 import dozer.module.ModuleCategory;
 import dozer.module.ModuleInfo;
 import dozer.util.player.MovementUtil;
-import dozer.event.impl.PacketEvent;
 import net.minecraft.src.network.packets.Packet0KeepAlive;
 import net.minecraft.src.network.packets.Packet11PlayerPosition;
 import net.minecraft.src.network.packets.Packet12PlayerLook;

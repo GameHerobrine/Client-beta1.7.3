@@ -4,7 +4,7 @@ import dozer.util.MinecraftUtil;
 
 public class MovementUtil implements MinecraftUtil {
 
-    public void setSpeed(double moveSpeed, float yaw, double strafe, double forward) {
+    public static void setSpeed(double moveSpeed, float yaw, double strafe, double forward) {
         if (forward != 0.0D) {
             if (strafe > 0.0D) {
                 yaw += ((forward > 0.0D) ? -45 : 45);
@@ -29,7 +29,7 @@ public class MovementUtil implements MinecraftUtil {
         mc.thePlayer.motionZ = forward * moveSpeed * mz - strafe * moveSpeed * mx;
     }
 
-    public void setSpeed(double moveSpeed) {
+    public static void setSpeed(double moveSpeed) {
         setSpeed(moveSpeed, mc.thePlayer.rotationYaw, mc.thePlayer.movementInput.moveStrafe, mc.thePlayer.movementInput.moveForward);
     }
 

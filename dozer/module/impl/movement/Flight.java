@@ -12,7 +12,8 @@ import org.lwjgl.input.Keyboard;
 @ModuleInfo(name = "Flight", description = "Allows you to fly.", category = ModuleCategory.MOVEMENT)
 public class Flight extends Module {
 
-    private final MovementUtil movementUtil = new MovementUtil();
+
+
 
     @Subscribe
     public void onUpdate(final UpdateEvent event) {
@@ -24,7 +25,7 @@ public class Flight extends Module {
             mc.thePlayer.motionY -= 0.08;
         }
         if (mc.thePlayer.movementInput.moveForward != 0 || mc.thePlayer.movementInput.moveStrafe != 0) {
-            movementUtil.setSpeed(MathHelper.sqrt_double(mc.thePlayer.motionX * mc.thePlayer.motionX + mc.thePlayer.motionZ * mc.thePlayer.motionZ));
+            MovementUtil.setSpeed(MathHelper.sqrt_double(mc.thePlayer.motionX * mc.thePlayer.motionX + mc.thePlayer.motionZ * mc.thePlayer.motionZ));
         }
     }
 

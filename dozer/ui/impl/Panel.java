@@ -5,8 +5,8 @@ import dozer.module.Module;
 import dozer.module.ModuleCategory;
 import dozer.ui.ClickGUI;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.gui.Gui;
 import net.minecraft.src.MathHelper;
+import net.minecraft.src.gui.Gui;
 
 import java.awt.*;
 import java.util.ArrayList;

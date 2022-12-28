@@ -2,17 +2,17 @@ package dozer.module;
 
 import dozer.Dozer;
 import dozer.setting.Setting;
+import dozer.setting.SettingManager;
+import dozer.setting.impl.SettingBoolean;
+import dozer.setting.impl.SettingMode;
+import dozer.setting.impl.SettingNumber;
 import dozer.util.MinecraftUtil;
 import lombok.Data;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Data
 public class Module implements MinecraftUtil {
 
-  public List<Setting> settings;
+  public SettingManager settingManager = new SettingManager();
   protected String name, description, suffix;
   protected ModuleCategory category;
   protected int keyBind;
@@ -26,12 +26,8 @@ public class Module implements MinecraftUtil {
     setKeyBind(moduleinfo.keyCode());
     this.toggled = false;
     this.suffix = "";
-    settings = new ArrayList<>();
   }
 
-  public void addSettings(Setting... setting) {
-    Arrays.asList(setting).forEach(Dozer.getSingleton().getSettingManager()::addSetting);
-  }
 
   public void onEnable() {}
 
@@ -47,4 +43,24 @@ public class Module implements MinecraftUtil {
       Dozer.getSingleton().getEventBus().unregister(this);
     }
   }
+
+  public SettingBoolean boolSetting(String name, Setting.dependency dependency, boolean defaultValue) {
+    SettingBoolean settingBoolean = new SettingBoolean(name, dependency, defaultValue);
+    getSettingManager().addSetting(settingBoolean);
+    return settingBoolean;
+  }
+
+
+  public SettingNumber numberSetting(String name, Setting.dependency dependency, double defaultValue, double min, double max, double increment) {
+    SettingNumber settingNumber = new SettingNumber(name, dependency, defaultValue, min, max, increment);
+    getSettingManager().addSetting(settingNumber);
+    return settingNumber;
+  }
+
+  public SettingMode<?> modeSetting(String name, Setting.dependency dependency, Enum<?> defaultValue, Enum<?>[] defaultValues) {
+    SettingMode<?> settingMode = new SettingMode(name, dependency, defaultValue, defaultValues);
+    getSettingManager().addSetting(settingMode);
+    return settingMode;
+  }
+
 }

@@ -4,7 +4,6 @@ package dozer.command;
 import dozer.Dozer;
 import dozer.event.Subscribe;
 import dozer.event.impl.ChatEvent;
-import dozer.module.Module;
 import lombok.SneakyThrows;
 import org.reflections.Reflections;
 
