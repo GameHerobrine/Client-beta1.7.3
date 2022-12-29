@@ -4,6 +4,7 @@ import dozer.module.ModuleCategory;
 import dozer.ui.clickGui.impl.CategoryPanel;
 import dozer.ui.clickGui.impl.ModuleButton;
 import dozer.util.render.Render2DUtil;
+import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.gui.GuiScreen;
 
 
@@ -16,14 +17,16 @@ public class ClickGUI extends GuiScreen implements Render2DUtil {
     private final List<CategoryPanel> panels = new ArrayList<>();
 
     public ClickGUI() {
-        int x = 5;
+
         int y = 5;
         int width = 100;
         int height = 14;
         int offset = 0;
+        int x = 5;
+
         for (ModuleCategory category : ModuleCategory.values()) {
             panels.add(new CategoryPanel(category, x + offset, y, width, height, new Color(253, 169, 0)));
-            offset += width + 10;
+            offset += width + 1;
         }
     }
 
