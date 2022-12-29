@@ -25,8 +25,6 @@ public class SettingCheckBox extends Setting<CheckBox, Boolean> {
     setValue(Boolean.parseBoolean(s));
   }
 
-  public void cycle() {
-    setValue(!getValue());
-  }
+
 
 }

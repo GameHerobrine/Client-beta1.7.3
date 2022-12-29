@@ -1,7 +1,8 @@
-package dozer.ui.impl.settings;
+package dozer.ui.clickGui.impl.settings;
 
 import dozer.setting.impl.SettingSlider;
-import dozer.ui.impl.Button;
+import dozer.ui.clickGui.impl.ModuleButton;
+import dozer.ui.clickGui.impl.Widget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.gui.Gui;
 
@@ -9,25 +10,21 @@ import java.awt.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Slider extends SettingComponent {
+public class Slider extends Widget {
 
-    private double x;
-    private double y;
     private final SettingSlider numberSetting;
+    private boolean dragging;
 
-    private boolean dragging = false;
-
-    public Slider(SettingSlider numberSetting, Button parent) {
-        super(numberSetting, parent);
+    public Slider(SettingSlider numberSetting, int x, int y, int width, int height, Color color) {
+        super(x, y, width, height, color);
         this.numberSetting = numberSetting;
     }
 
     @Override
-    public int drawScreen(int mouseX, int mouseY, double x, double y) {
-        this.x = x;
-        this.y = y;
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
-        if (this.dragging) {
+
+        if (dragging) {
             double diff = mouseX - (this.x);
             double min = this.numberSetting.min();
             double max = this.numberSetting.max();
@@ -47,11 +44,10 @@ public class Slider extends SettingComponent {
             }
         }
 
-        Gui.drawRect(x, y, x + 100, y + 14, new Color(16, 16, 16, 200).getRGB());
-        Gui.drawRect(x, y + 13, x + (this.numberSetting.getValue() / this.numberSetting.max() * 100), y + 14, new Color(255, 255, 255, 200).getRGB());
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.numberSetting.getName(), this.x + 2, this.y + 3, -1);
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(this.numberSetting.getValue() + "", this.x + 100 - Minecraft.getMinecraft().fontRenderer.getStringWidth(this.numberSetting.getValue() + "") - 2, this.y + 2, -1);
-        return 14;
+        drawRect(x, y, x + 100, y + 14, new Color(16, 16, 16, 200));
+        drawRect(x, y + 13, (int) (x + (this.numberSetting.getValue() / this.numberSetting.max() * 100)), y + 14, new Color(255, 255, 255, 200));
+        drawStringWithShadow(this.numberSetting.getName(), this.x + 2, this.y + 3, Color.WHITE);
+        drawStringWithShadow(this.numberSetting.getValue() + "", this.x + 100 - Minecraft.getMinecraft().fontRenderer.getStringWidth(this.numberSetting.getValue() + "") - 2, this.y + 2, Color.WHITE);
     }
 
     public double roundToPlace(double value) {
@@ -67,20 +63,27 @@ public class Slider extends SettingComponent {
         return bd.doubleValue();
     }
 
+
+
     @Override
-    public void mouseClicked(int x, int y, int button) {
-        if (button == 0) {
-            if (isHovered(x, y, this.x, this.y)) {
-                dragging = true;
-            }
+    public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+
+        if(!isHovering(mouseX, mouseY)) return;
+
+        if (mouseButton == 0) {
+            dragging = true;
+            System.out.println("dragging");
         }
     }
 
     @Override
     public void mouseReleased(int x, int y, int button) {
-        if (button == 0) {
-            dragging = false;
-        }
+        dragging = false;
+    }
+
+    @Override
+    public void keyTyped(char character, int keyCode) {
+
     }
 
 }
