@@ -1,5 +1,7 @@
 package net.minecraft.src.render;
 
+import dozer.Dozer;
+import dozer.event.impl.Render3DEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.block.Block;
@@ -272,6 +274,10 @@ public class RenderGlobal implements WorldAccess {
   }
 
   public void renderEntities(Vec3D vec3d, ICamera icamera, float f) {
+
+    Dozer.getSingleton().getEventBus().post(new Render3DEvent());
+
+
     if (renderEntitiesStartupCounter > 0) {
       renderEntitiesStartupCounter--;
       return;

@@ -21,7 +21,7 @@ public class AxisAlignedBB {
   public double maxY;
   public double maxZ;
 
-  private AxisAlignedBB(double d, double d1, double d2, double d3, double d4, double d5) {
+  public AxisAlignedBB(double d, double d1, double d2, double d3, double d4, double d5) {
     minX = d;
     minY = d1;
     minZ = d2;
