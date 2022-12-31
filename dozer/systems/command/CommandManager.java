@@ -43,6 +43,10 @@ public class CommandManager {
         event.setCancelled(true);
     }
 
+    public CopyOnWriteArrayList<Command> getCommands() {
+        return commands;
+    }
+
     public Command getCommandByName(String name) throws IllegalArgumentException {
         return commands.stream().filter(
                 command -> command.getName().equalsIgnoreCase(name)

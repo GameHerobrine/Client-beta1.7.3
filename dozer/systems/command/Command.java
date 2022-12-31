@@ -1,6 +1,7 @@
 package dozer.systems.command;
 
 import dozer.util.MinecraftUtil;
+import dozer.util.chat.ChatColorUtil;
 
 public abstract class Command implements MinecraftUtil {
 
