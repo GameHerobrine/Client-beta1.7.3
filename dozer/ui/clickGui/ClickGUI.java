@@ -1,10 +1,9 @@
 package dozer.ui.clickGui;
 
-import dozer.module.ModuleCategory;
+import dozer.systems.module.ModuleCategory;
 import dozer.ui.clickGui.impl.CategoryPanel;
 import dozer.ui.clickGui.impl.ModuleButton;
 import dozer.util.render.Render2DUtil;
-import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.gui.GuiScreen;
 
 

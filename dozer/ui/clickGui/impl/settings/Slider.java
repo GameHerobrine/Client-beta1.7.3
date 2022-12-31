@@ -1,23 +1,19 @@
 package dozer.ui.clickGui.impl.settings;
 
-import dozer.setting.impl.SettingSlider;
-import dozer.ui.clickGui.impl.ModuleButton;
+import dozer.systems.setting.impl.SettingSlider;
 import dozer.ui.clickGui.impl.Widget;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.gui.Gui;
 
 import java.awt.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Slider extends Widget {
+public class Slider extends Widget<SettingSlider> {
 
-    private final SettingSlider numberSetting;
     private boolean dragging;
 
     public Slider(SettingSlider numberSetting, int x, int y, int width, int height, Color color) {
-        super(x, y, width, height, color);
-        this.numberSetting = numberSetting;
+        super(numberSetting, x, y, width, height, color);
     }
 
     @Override
@@ -26,28 +22,25 @@ public class Slider extends Widget {
 
         if (dragging) {
             double diff = mouseX - (this.x);
-            double min = this.numberSetting.min();
-            double max = this.numberSetting.max();
+            double min = type.min();
+            double max = type.max();
 
             if (diff == 0) {
-                this.numberSetting.setValue(this.numberSetting.min());
+                type.setValue(type.min());
             } else {
                 double newValue = this.roundToPlace(((diff / (100)) * (max - min) + min));
-                newValue = this.roundToIncrement(newValue, this.numberSetting.increment());
-                if (newValue > this.numberSetting.max()) {
-                    newValue = this.numberSetting.min();
-                }
-                if (newValue < this.numberSetting.min()) {
-                    newValue = this.numberSetting.min();
-                }
-                this.numberSetting.setValue(newValue);
+                newValue = this.roundToIncrement(newValue, type.increment());
+
+                if (newValue > type.max() || newValue < type.min()) newValue = type.min();
+
+                type.setValue(newValue);
             }
         }
 
         drawRect(x, y, x + 100, y + 14, new Color(16, 16, 16, 200));
-        drawRect(x, y + 13, (int) (x + (this.numberSetting.getValue() / this.numberSetting.max() * 100)), y + 14, new Color(255, 255, 255, 200));
-        drawStringWithShadow(this.numberSetting.getName(), this.x + 2, this.y + 3, Color.WHITE);
-        drawStringWithShadow(this.numberSetting.getValue() + "", this.x + 100 - Minecraft.getMinecraft().fontRenderer.getStringWidth(this.numberSetting.getValue() + "") - 2, this.y + 2, Color.WHITE);
+        drawRect(x, y + 13, (int) (x + (type.getValue() / type.max() * 100)), y + 14, new Color(255, 255, 255, 200));
+        drawStringWithShadow(type.getName(), this.x + 2, this.y + 3, Color.WHITE);
+        drawStringWithShadow(type.getValue() + "", this.x + 100 - fontRenderer().getStringWidth(type.getValue() + "") - 2, this.y + 2, Color.WHITE);
     }
 
     public double roundToPlace(double value) {
@@ -72,7 +65,6 @@ public class Slider extends Widget {
 
         if (mouseButton == 0) {
             dragging = true;
-            System.out.println("dragging");
         }
     }
 
