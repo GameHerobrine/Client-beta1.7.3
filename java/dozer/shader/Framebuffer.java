@@ -144,6 +144,8 @@ public class Framebuffer
     {
         int var1 = EXTFramebufferObject.glCheckFramebufferStatusEXT(36160);
 
+        if(var1 == 36053) return;
+
         switch (var1) {
             case 36054 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT");
             case 36055 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT");
@@ -154,6 +156,7 @@ public class Framebuffer
             default -> throw new RuntimeException("glCheckFramebufferStatusEXT returned unknown status:" + var1);
         }
     }
+
 
     public void bindFramebufferTexture()
     {

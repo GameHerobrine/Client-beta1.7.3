@@ -9,6 +9,8 @@ import java.io.*;
 import java.nio.FloatBuffer;
 import java.util.stream.Collectors;
 
+import static org.lwjgl.opengl.GL20.glGetUniformLocation;
+
 @Getter
 public class Shader {
 
@@ -62,23 +64,27 @@ public class Shader {
   }
 
   public void setUniformMat4(String name, boolean bool, FloatBuffer buffer) {
-    GL20.glUniformMatrix4(GL20.glGetUniformLocation(this.programID, name), bool, buffer);
+    GL20.glUniformMatrix4(glGetUniformLocation(this.programID, name), bool, buffer);
   }
 
   public void setUniform2f(String name, float x, float y) {
-    GL20.glUniform2f(GL20.glGetUniformLocation(this.programID, name), x, y);
+    GL20.glUniform2f(glGetUniformLocation(this.programID, name), x, y);
   }
 
   public void setUniform3f(String name, float x, float y, float z) {
-    GL20.glUniform3f(GL20.glGetUniformLocation(this.programID, name), x, y, z);
+    GL20.glUniform3f(glGetUniformLocation(this.programID, name), x, y, z);
   }
 
   public void setUniform1i(String name, int i) {
-    GL20.glUniform1i(GL20.glGetUniformLocation(this.programID, name), i);
+    GL20.glUniform1i(glGetUniformLocation(this.programID, name), i);
   }
 
   public void setUniform1f(String name, float i) {
-    GL20.glUniform1f(GL20.glGetUniformLocation(this.programID, name), i);
+    GL20.glUniform1f(glGetUniformLocation(this.programID, name), i);
+  }
+
+  public int getUniform(String name) {
+    return glGetUniformLocation(programID, name);
   }
 
 }

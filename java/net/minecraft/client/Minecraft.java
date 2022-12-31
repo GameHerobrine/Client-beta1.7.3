@@ -2,6 +2,9 @@ package net.minecraft.client;
 
 import dozer.Dozer;
 import dozer.event.impl.KeyPressEvent;
+import dozer.shader.Framebuffer;
+import dozer.shader.renderer.OpenGlHelper;
+import lombok.Getter;
 import net.minecraft.src.*;
 import net.minecraft.src.block.Block;
 import net.minecraft.src.entity.*;
@@ -31,6 +34,7 @@ import java.io.File;
 
 public abstract class Minecraft implements Runnable {
 
+  @Getter public Framebuffer framebuffer;
   public static byte[] field_28006_b = new byte[0xa00000];
   public static long[] frameTimes = new long[512];
   public static long[] tickTimes = new long[512];
@@ -282,6 +286,10 @@ public abstract class Minecraft implements Runnable {
   }
 
   public void startGame() throws LWJGLException {
+
+
+    this.gameSettings = new GameSettings(this, mcDataDir);
+
     if (mcCanvas != null) {
       Graphics g = mcCanvas.getGraphics();
       if (g != null) {
@@ -314,9 +322,14 @@ public abstract class Minecraft implements Runnable {
       }
       Display.create();
     }
+
+
+    OpenGlHelper.initializeTextures();
+    this.framebuffer = new Framebuffer(this.displayWidth, this.displayHeight, true);
+    this.framebuffer.setFramebufferColor(0.0F, 0.0F, 0.0F, 0.0F);
+
     mcDataDir = getMinecraftDir();
     saveLoader = new SaveConverterMcRegion(new File(mcDataDir, "saves"));
-    gameSettings = new GameSettings(this, mcDataDir);
     texturePackList = new TexturePackList(this, mcDataDir);
     renderEngine = new RenderEngine(texturePackList, gameSettings);
     fontRenderer = new FontRenderer(gameSettings, "/font/default.png", renderEngine);
@@ -336,6 +349,8 @@ public abstract class Minecraft implements Runnable {
     } catch (Exception exception) {
       exception.printStackTrace();
     }
+
+
     checkGLError("Pre startup");
     GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
     GL11.glShadeModel(7425 /*GL_SMOOTH*/);
