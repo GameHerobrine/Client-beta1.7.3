@@ -2,12 +2,12 @@ package dozer.util.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
+import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.gui.Gui;
 
 import java.awt.*;
 
 public interface Render2DUtil {
-
 
     /**
      * returns minecraft font renderer
@@ -43,6 +43,10 @@ public interface Render2DUtil {
      */
     default void drawStringWithShadow(String text, int x, int y, Color color) {
         fontRenderer().drawStringWithShadow(text, x, y, color.getRGB());
+    }
+
+    default ScaledResolution scaledResolution() {
+        return new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
     }
 
 }

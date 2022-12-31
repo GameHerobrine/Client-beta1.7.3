@@ -12,7 +12,7 @@ public class ClickGuiModule extends Module {
     @Override
     public void onEnable() {
         mc.displayGuiScreen(new ClickGUI());
-        //this.toggle();
+        this.toggle();
     }
 
 }
