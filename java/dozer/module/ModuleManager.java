@@ -81,6 +81,19 @@ public class ModuleManager {
         .orElseThrow(IllegalArgumentException::new);
   }
 
+
+  /**
+   * Gets a module by its class.
+   *
+   * @return The module.
+   */
+  public Module getModuleByClass(Class<?> klass) throws IllegalArgumentException {
+    return moduleList.stream()
+            .filter(module -> module.getClass().equals(klass))
+            .findFirst()
+            .orElseThrow(IllegalArgumentException::new);
+  }
+
   /**
    * Gets enabled modules.
    *

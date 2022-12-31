@@ -4,7 +4,10 @@
 
 package net.minecraft.src.gui;
 
+import com.sun.tools.javac.Main;
 import dozer.Dozer;
+import dozer.module.impl.client.ClickGuiModule;
+import dozer.module.impl.client.MainMenu;
 import dozer.util.chat.ChatColorUtil;
 import dozer.util.render.shader.Shader;
 import net.minecraft.src.Tessellator;
@@ -24,6 +27,7 @@ public class GuiMainMenu extends GuiScreen {
   private float updateCounter;
   private String splashText;
   private final Shader shader = new Shader("vertex.glsl", "shader.glsl");
+  private final boolean customButtons;
 
   public GuiMainMenu() {
     updateCounter = 0.0F;
@@ -43,6 +47,8 @@ public class GuiMainMenu extends GuiScreen {
     };
 
     splashText = splashTextArray[rand.nextInt(splashTextArray.length)];
+
+    customButtons = MainMenu.buttons;
   }
 
   public void updateScreen() {
@@ -53,11 +59,11 @@ public class GuiMainMenu extends GuiScreen {
 
   public void initGui() {
     int i = height / 4 + 48;
-    controlList.add(new GuiButton(1, width / 2 - 100, i, "Singleplayer"));
-    controlList.add(new GuiButton(2, width / 2 - 100, i + 24, "Multiplayer"));
-    controlList.add(new GuiButton(3, width / 2 - 100, i + 48, "Texture Packs"));
-    controlList.add(new GuiButton(4, width / 2 - 100, i + 72, "Options..."));
-    controlList.add(new GuiButton(5, width / 2 - 100, i + 96, "Quit"));
+    controlList.add(new GuiButton(1, width / 2 - 100, i, "Singleplayer", customButtons));
+    controlList.add(new GuiButton(2, width / 2 - 100, i + 24, "Multiplayer", customButtons));
+    controlList.add(new GuiButton(3, width / 2 - 100, i + 48, "Texture Packs", customButtons));
+    controlList.add(new GuiButton(4, width / 2 - 100, i + 72, "Options...", customButtons));
+    controlList.add(new GuiButton(5, width / 2 - 100, i + 96, "Quit", customButtons));
   }
 
   protected void actionPerformed(GuiButton guibutton) {
@@ -74,11 +80,14 @@ public class GuiMainMenu extends GuiScreen {
     drawDefaultBackground();
 
     //not the best way of doing this
-    shader.useShader();
-    shader.setUniform2f("resolution", width, height);
-    shader.setUniform1f("time", (float) (System.currentTimeMillis() - shader.getInitTime()) / 2000F);
-    Gui.drawRect(0, 0, width, height, 0xFFFFFFFF);
-    shader.stopShader();
+
+    if (Dozer.getSingleton().getModuleManager().getModuleByClass(MainMenu.class).isToggled()) {
+      shader.useShader();
+      shader.setUniform2f("resolution", width, height);
+      shader.setUniform1f("time", (float) (System.currentTimeMillis() - shader.getInitTime()) / 2000F);
+      Gui.drawRect(0, 0, width, height, 0xFFFFFFFF);
+      shader.stopShader();
+    }
 
     Tessellator tessellator = Tessellator.instance;
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
