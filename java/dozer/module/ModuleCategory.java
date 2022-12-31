@@ -12,7 +12,8 @@ public enum ModuleCategory {
     RENDER("Render", new Color(214, 151, 35).getRGB()),
     PLAYER("Player", new Color(68, 130, 133).getRGB()),
     MISC("Misc", new Color(177, 97, 134).getRGB()),
-    EXPLOIT("Exploit", new Color(40, 39, 48).getRGB());
+    EXPLOIT("Exploit", new Color(40, 39, 48).getRGB()),
+    CLIENT("Client", new Color(235, 219, 178).getRGB());
 
     final String name;
     final int color;

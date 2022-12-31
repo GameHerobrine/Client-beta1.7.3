@@ -1,4 +1,4 @@
-package dozer.module.impl.render;
+package dozer.module.impl.client;
 
 import dozer.module.Module;
 import dozer.module.ModuleCategory;
@@ -6,7 +6,7 @@ import dozer.module.ModuleInfo;
 import dozer.ui.clickGui.ClickGUI;
 import org.lwjgl.input.Keyboard;
 
-@ModuleInfo(name = "ClickGUI", description = "Opens the ClickGUI.", category = ModuleCategory.RENDER, keyCode = Keyboard.KEY_RSHIFT)
+@ModuleInfo(name = "ClickGUI", description = "Opens the ClickGUI.", category = ModuleCategory.CLIENT, keyCode = Keyboard.KEY_RSHIFT)
 public class ClickGuiModule extends Module {
 
     @Override

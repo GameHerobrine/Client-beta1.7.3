@@ -1,4 +1,4 @@
-package dozer.module.impl.render;
+package dozer.module.impl.client;
 
 import dozer.Dozer;
 import dozer.event.Subscribe;
@@ -14,7 +14,7 @@ import net.minecraft.src.gui.GuiChat;
 import java.util.Comparator;
 import java.util.List;
 
-@ModuleInfo(name = "HUD", description = "Displays the HUD.", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "HUD", description = "Displays the HUD.", category = ModuleCategory.CLIENT)
 public class HUD extends Module {
 
     private final ChatColorUtil chatColorUtil = new ChatColorUtil();

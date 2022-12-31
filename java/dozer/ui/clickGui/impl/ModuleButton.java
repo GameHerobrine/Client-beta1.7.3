@@ -2,7 +2,7 @@ package dozer.ui.clickGui.impl;
 
 import dozer.Dozer;
 import dozer.module.Module;
-import dozer.module.impl.render.ClickGuiModule;
+import dozer.module.impl.client.ClickGuiModule;
 import dozer.setting.Setting;
 import dozer.setting.impl.SettingCheckBox;
 import dozer.setting.impl.SettingMode;
