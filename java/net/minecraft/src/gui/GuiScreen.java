@@ -25,14 +25,14 @@ public class GuiScreen extends Gui {
   public boolean field_948_f;
   public GuiParticle field_25091_h;
   protected Minecraft mc;
-  protected List controlList;
+  protected List<GuiButton> controlList;
   protected FontRenderer fontRenderer;
   private int eventButton;
   private long lastMouseEvent;
   private GuiButton selectedButton;
 
   public GuiScreen() {
-    controlList = new ArrayList();
+    controlList = new ArrayList<>();
     field_948_f = false;
     selectedButton = null;
   }

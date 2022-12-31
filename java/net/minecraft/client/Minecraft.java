@@ -228,7 +228,7 @@ public abstract class Minecraft implements Runnable {
     if (s != null && s1 != null) {
       minecraftimpl.session = new Session(s, s1);
     } else {
-      minecraftimpl.session = new Session("Dozer", "");
+      minecraftimpl.session = new Session("DeezNuts", "");
     }
     if (s2 != null) {
       String[] as = s2.split(":");
@@ -585,7 +585,7 @@ public abstract class Minecraft implements Runnable {
             if (fullscreen) {
               toggleFullscreen();
             }
-            Thread.sleep(10L);
+            Thread.yield();
           }
           if (gameSettings.showDebugInfo) {
             displayDebugInfo(l2);
@@ -917,14 +917,7 @@ public abstract class Minecraft implements Runnable {
     }
   }
 
-  private void func_28001_B() {
-    (new ThreadCheckHasPaid(this)).start();
-  }
-
   public void runTick() {
-    if (ticksRan == 6000) {
-      func_28001_B();
-    }
     statFileWriter.func_27178_d();
     ingameGUI.updateTick();
     entityRenderer.getMouseOver(1.0F);

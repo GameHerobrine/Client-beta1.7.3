@@ -26,6 +26,11 @@ public class GuiChat extends GuiScreen {
     updateCounter = 0;
   }
 
+  @Override
+  public boolean doesGuiPauseGame() {
+    return false;
+  }
+
   public void initGui() {
     Keyboard.enableRepeatEvents(true);
   }

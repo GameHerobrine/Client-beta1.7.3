@@ -11,38 +11,38 @@ import java.nio.ByteBuffer;
 
 public class Framebuffer
 {
-    public int framebufferTextureWidth;
-    public int framebufferTextureHeight;
-    public int framebufferWidth;
-    public int framebufferHeight;
+    public int textureWidth;
+    public int textureHeight;
+    public int width;
+    public int height;
     public boolean useDepth;
     public int framebufferObject;
-    public int framebufferTexture;
+    public int texture;
     public int depthBuffer;
-    public float[] framebufferColor;
-    public int framebufferFilter;
+    public float[] color;
+    public int filter;
     private static final String __OBFID = "CL_00000959";
 
-    public Framebuffer(int p_i45078_1_, int p_i45078_2_, boolean p_i45078_3_)
+    public Framebuffer(int width, int height, boolean depth)
     {
-        this.useDepth = p_i45078_3_;
+        this.useDepth = depth;
         this.framebufferObject = -1;
-        this.framebufferTexture = -1;
+        this.texture = -1;
         this.depthBuffer = -1;
-        this.framebufferColor = new float[4];
-        this.framebufferColor[0] = 1.0F;
-        this.framebufferColor[1] = 1.0F;
-        this.framebufferColor[2] = 1.0F;
-        this.framebufferColor[3] = 0.0F;
-        this.createBindFramebuffer(p_i45078_1_, p_i45078_2_);
+        this.color = new float[4];
+        this.color[0] = 0.0F;
+        this.color[1] = 0.0F;
+        this.color[2] = 0.0F;
+        this.color[3] = 0.0F;
+        this.createBindFramebuffer(width, height);
     }
 
-    public void createBindFramebuffer(int p_147613_1_, int p_147613_2_)
+    public void createBindFramebuffer(int width, int height)
     {
         if (!OpenGlHelper.isFramebufferEnabled())
         {
-            this.framebufferWidth = p_147613_1_;
-            this.framebufferHeight = p_147613_2_;
+            this.width = width;
+            this.height = height;
         }
         else
         {
@@ -50,16 +50,16 @@ public class Framebuffer
 
             if (this.framebufferObject >= 0)
             {
-                this.deleteFramebuffer();
+                this.delete();
             }
 
-            this.createFramebuffer(p_147613_1_, p_147613_2_);
+            this.createFramebuffer(width, height);
             this.checkFramebufferComplete();
             EXTFramebufferObject.glBindFramebufferEXT(36160, 0);
         }
     }
 
-    public void deleteFramebuffer()
+    public void delete()
     {
         if (OpenGlHelper.isFramebufferEnabled())
         {
@@ -72,10 +72,10 @@ public class Framebuffer
                 this.depthBuffer = -1;
             }
 
-            if (this.framebufferTexture > -1)
+            if (this.texture > -1)
             {
-                TextureUtil.deleteTexture(this.framebufferTexture);
-                this.framebufferTexture = -1;
+                TextureUtil.deleteTexture(this.texture);
+                this.texture = -1;
             }
 
             if (this.framebufferObject > -1)
@@ -89,10 +89,10 @@ public class Framebuffer
 
     public void createFramebuffer(int p_147605_1_, int p_147605_2_)
     {
-        this.framebufferWidth = p_147605_1_;
-        this.framebufferHeight = p_147605_2_;
-        this.framebufferTextureWidth = p_147605_1_;
-        this.framebufferTextureHeight = p_147605_2_;
+        this.width = p_147605_1_;
+        this.height = p_147605_2_;
+        this.textureWidth = p_147605_1_;
+        this.textureHeight = p_147605_2_;
 
         if (!OpenGlHelper.isFramebufferEnabled())
         {
@@ -101,23 +101,23 @@ public class Framebuffer
         else
         {
             this.framebufferObject = EXTFramebufferObject.glGenFramebuffersEXT();
-            this.framebufferTexture = TextureUtil.glGenTextures();
+            this.texture = TextureUtil.glGenTextures();
 
             if (this.useDepth)
             {
                 this.depthBuffer = EXTFramebufferObject.glGenRenderbuffersEXT();
             }
 
-            this.setFramebufferFilter(9729);
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.framebufferTexture);
-            GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA8, this.framebufferTextureWidth, this.framebufferTextureHeight, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, (ByteBuffer)null);
+            this.setFilter(9729);
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.texture);
+            GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA8, this.textureWidth, this.textureHeight, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, (ByteBuffer)null);
             EXTFramebufferObject.glBindFramebufferEXT(36160, this.framebufferObject);
-            EXTFramebufferObject.glFramebufferTexture2DEXT(36160, 36064, 3553, this.framebufferTexture, 0);
+            EXTFramebufferObject.glFramebufferTexture2DEXT(36160, 36064, 3553, this.texture, 0);
 
             if (this.useDepth)
             {
                 EXTFramebufferObject.glBindRenderbufferEXT(36161, this.depthBuffer);
-                EXTFramebufferObject.glRenderbufferStorageEXT(36161, 33190, this.framebufferTextureWidth, this.framebufferTextureHeight);
+                EXTFramebufferObject.glRenderbufferStorageEXT(36161, 33190, this.textureWidth, this.textureHeight);
                 EXTFramebufferObject.glFramebufferRenderbufferEXT(36160, 36096, 36161, this.depthBuffer);
             }
 
@@ -126,12 +126,12 @@ public class Framebuffer
         }
     }
 
-    public void setFramebufferFilter(int p_147607_1_)
+    public void setFilter(int p_147607_1_)
     {
         if (OpenGlHelper.isFramebufferEnabled())
         {
-            this.framebufferFilter = p_147607_1_;
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.framebufferTexture);
+            this.filter = p_147607_1_;
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.texture);
             GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, (float)p_147607_1_);
             GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, (float)p_147607_1_);
             GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, 10496.0F);
@@ -144,32 +144,14 @@ public class Framebuffer
     {
         int var1 = EXTFramebufferObject.glCheckFramebufferStatusEXT(36160);
 
-        switch (var1)
-        {
-            case 36053:
-                return;
-
-            case 36054:
-                throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT");
-
-            case 36055:
-                throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT");
-
-            case 36056:
-            default:
-                throw new RuntimeException("glCheckFramebufferStatusEXT returned unknown status:" + var1);
-
-            case 36057:
-                throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT");
-
-            case 36058:
-                throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT");
-
-            case 36059:
-                throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT");
-
-            case 36060:
-                throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT");
+        switch (var1) {
+            case 36054 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT");
+            case 36055 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT");
+            case 36057 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT");
+            case 36058 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT");
+            case 36059 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT");
+            case 36060 -> throw new RuntimeException("GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT");
+            default -> throw new RuntimeException("glCheckFramebufferStatusEXT returned unknown status:" + var1);
         }
     }
 
@@ -177,7 +159,7 @@ public class Framebuffer
     {
         if (OpenGlHelper.isFramebufferEnabled())
         {
-            GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.framebufferTexture);
+            GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.texture);
         }
     }
 
@@ -197,7 +179,7 @@ public class Framebuffer
 
             if (p_147610_1_)
             {
-                GL11.glViewport(0, 0, this.framebufferWidth, this.framebufferHeight);
+                GL11.glViewport(0, 0, this.width, this.height);
             }
         }
     }
@@ -212,10 +194,10 @@ public class Framebuffer
 
     public void setFramebufferColor(float p_147604_1_, float p_147604_2_, float p_147604_3_, float p_147604_4_)
     {
-        this.framebufferColor[0] = p_147604_1_;
-        this.framebufferColor[1] = p_147604_2_;
-        this.framebufferColor[2] = p_147604_3_;
-        this.framebufferColor[3] = p_147604_4_;
+        this.color[0] = p_147604_1_;
+        this.color[1] = p_147604_2_;
+        this.color[2] = p_147604_3_;
+        this.color[3] = p_147604_4_;
     }
 
     public void framebufferRender(int p_147615_1_, int p_147615_2_)
@@ -227,7 +209,7 @@ public class Framebuffer
             GL11.glDepthMask(false);
             GL11.glMatrixMode(GL11.GL_PROJECTION);
             GL11.glLoadIdentity();
-            GL11.glOrtho(0.0D, (double)p_147615_1_, (double)p_147615_2_, 0.0D, 1000.0D, 3000.0D);
+            GL11.glOrtho(0.0D, p_147615_1_, p_147615_2_, 0.0D, 1000.0D, 3000.0D);
             GL11.glMatrixMode(GL11.GL_MODELVIEW);
             GL11.glLoadIdentity();
             GL11.glTranslatef(0.0F, 0.0F, -2000.0F);
@@ -241,8 +223,8 @@ public class Framebuffer
             this.bindFramebufferTexture();
             float var3 = (float)p_147615_1_;
             float var4 = (float)p_147615_2_;
-            float var5 = (float)this.framebufferWidth / (float)this.framebufferTextureWidth;
-            float var6 = (float)this.framebufferHeight / (float)this.framebufferTextureHeight;
+            float var5 = (float)this.width / (float)this.textureWidth;
+            float var6 = (float)this.height / (float)this.textureHeight;
             DozerTessellator var7 = DozerTessellator.instance;
             var7.startDrawingQuads();
             var7.setColorOpaque_I(-1);
@@ -260,7 +242,7 @@ public class Framebuffer
     public void framebufferClear()
     {
         this.bindFramebuffer(true);
-        GL11.glClearColor(this.framebufferColor[0], this.framebufferColor[1], this.framebufferColor[2], this.framebufferColor[3]);
+        GL11.glClearColor(this.color[0], this.color[1], this.color[2], this.color[3]);
         int var1 = 16384;
 
         if (this.useDepth)

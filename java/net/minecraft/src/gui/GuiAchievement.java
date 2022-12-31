@@ -106,7 +106,7 @@ public class GuiAchievement extends Gui {
     d1 *= d1;
     d1 *= d1;
     int i = achievementWindowWidth - 160;
-    int j = 0 - (int) (d1 * 36D);
+    int j = -(int) (d1 * 36D);
     int k = theGame.renderEngine.getTexture("/achievement/bg.png");
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     GL11.glEnable(3553 /*GL_TEXTURE_2D*/);

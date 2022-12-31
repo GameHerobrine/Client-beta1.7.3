@@ -55,13 +55,16 @@ public class GuiButton extends Gui {
     }
     FontRenderer fontrenderer = minecraft.fontRenderer;
     GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, minecraft.renderEngine.getTexture("/gui/gui.png"));
-    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+//    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     boolean flag =
         i >= xPosition && j >= yPosition && i < xPosition + width && j < yPosition + height;
     int k = getHoverState(flag);
-    drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height);
-    drawTexturedModalRect(
-        xPosition + width / 2, yPosition, 200 - width / 2, 46 + k * 20, width / 2, height);
+//    drawTexturedModalRect(xPosition, yPosition, 0, 46 + k * 20, width / 2, height);
+//    drawTexturedModalRect(
+//        xPosition + width / 2, yPosition, 200 - width / 2, 46 + k * 20, width / 2, height);
+
+    Gui.drawRect(xPosition, yPosition,xPosition + width, yPosition + height, flag ? 0x77000000 : 0xAA000000);
+
     mouseDragged(minecraft, i, j);
     if (!enabled) {
       drawCenteredString(

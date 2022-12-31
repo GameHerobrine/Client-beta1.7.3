@@ -232,7 +232,7 @@ public class ShaderManager
 
                 if (var2 instanceof Framebuffer)
                 {
-                    var3 = ((Framebuffer)var2).framebufferTexture;
+                    var3 = ((Framebuffer)var2).texture;
                 }
                 else if (var2 instanceof ITextureObject)
                 {

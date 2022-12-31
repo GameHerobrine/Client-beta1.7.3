@@ -32,7 +32,7 @@ public class ResourceLocation
 
         if (var4 >= 0)
         {
-            var3 = par1Str.substring(var4 + 1, par1Str.length());
+            var3 = par1Str.substring(var4 + 1);
 
             if (var4 > 1)
             {

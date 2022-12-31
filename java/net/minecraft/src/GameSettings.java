@@ -94,7 +94,7 @@ public class GameSettings {
     keyBindInventory = new KeyBinding("key.inventory", 18);
     keyBindDrop = new KeyBinding("key.drop", 16);
     keyBindChat = new KeyBinding("key.chat", 20);
-    keyBindToggleFog = new KeyBinding("key.fog", 33);
+    keyBindToggleFog = new KeyBinding("key.fog", 0);
     keyBindSneak = new KeyBinding("key.sneak", 42);
     keyBindings =
         (new KeyBinding[] {

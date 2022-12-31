@@ -26,9 +26,9 @@ public class ShaderGroup
     private final Framebuffer mainFramebuffer;
     private final IResourceManager resourceManager;
     private final String shaderGroupName;
-    private final List listShaders = Lists.newArrayList();
-    private final Map mapFramebuffers = Maps.newHashMap();
-    private final List listFramebuffers = Lists.newArrayList();
+    private final List<Shader> listShaders = Lists.newArrayList();
+    private final Map<String, Framebuffer> mapFramebuffers = Maps.newHashMap();
+    private final List<Framebuffer> listFramebuffers = Lists.newArrayList();
     private Matrix4f projectionMatrix;
     private int mainFramebufferWidth;
     private int mainFramebufferHeight;
@@ -42,8 +42,8 @@ public class ShaderGroup
         this.mainFramebuffer = p_i45088_2_;
         this.field_148036_j = 0.0F;
         this.field_148037_k = 0.0F;
-        this.mainFramebufferWidth = p_i45088_2_.framebufferWidth;
-        this.mainFramebufferHeight = p_i45088_2_.framebufferHeight;
+        this.mainFramebufferWidth = p_i45088_2_.width;
+        this.mainFramebufferHeight = p_i45088_2_.height;
         this.shaderGroupName = p_i45088_3_.toString();
         this.resetProjectionMatrix();
         this.initFromLocation(p_i45088_3_);
@@ -145,33 +145,33 @@ public class ShaderGroup
 
     private void initPass(JsonElement p_148019_1_) throws JsonException
     {
-        JsonObject var2 = JsonUtils.getJsonElementAsJsonObject(p_148019_1_, "pass");
-        String var3 = JsonUtils.getJsonObjectStringFieldValue(var2, "name");
-        String var4 = JsonUtils.getJsonObjectStringFieldValue(var2, "intarget");
-        String var5 = JsonUtils.getJsonObjectStringFieldValue(var2, "outtarget");
-        Framebuffer var6 = this.getFramebuffer(var4);
-        Framebuffer var7 = this.getFramebuffer(var5);
+        JsonObject pass = JsonUtils.getJsonElementAsJsonObject(p_148019_1_, "pass");
+        String name = JsonUtils.getJsonObjectStringFieldValue(pass, "name");
+        String inTarget = JsonUtils.getJsonObjectStringFieldValue(pass, "intarget");
+        String outTarget = JsonUtils.getJsonObjectStringFieldValue(pass, "outtarget");
+        Framebuffer var6 = this.getFramebuffer(inTarget);
+        Framebuffer var7 = this.getFramebuffer(outTarget);
 
         if (var6 == null)
         {
-            throw new JsonException("Input target \'" + var4 + "\' does not exist");
+            throw new JsonException(String.format("Input target '%s' does not exist.", inTarget));
         }
         else if (var7 == null)
         {
-            throw new JsonException("Output target \'" + var5 + "\' does not exist");
+            throw new JsonException("Output target \'" + outTarget + "\' does not exist");
         }
         else
         {
-            Shader var8 = this.addShader(var3, var6, var7);
-            JsonArray var9 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var2, "auxtargets", (JsonArray)null);
+            Shader var8 = this.addShader(name, var6, var7);
+            JsonArray var9 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(pass, "auxtargets", null);
 
             if (var9 != null)
             {
                 int var10 = 0;
 
-                for (Iterator var11 = var9.iterator(); var11.hasNext(); ++var10)
+                for (Iterator<JsonElement> var11 = var9.iterator(); var11.hasNext(); ++var10)
                 {
-                    JsonElement var12 = (JsonElement)var11.next();
+                    JsonElement var12 = var11.next();
 
                     try
                     {
@@ -185,7 +185,7 @@ public class ShaderGroup
                             throw new JsonException("Render target \'" + var15 + "\' does not exist");
                         }
 
-                        var8.addAuxFramebuffer(var23, var16, var16.framebufferTextureWidth, var16.framebufferTextureHeight);
+                        var8.addAuxFramebuffer(var23, var16, var16.textureWidth, var16.textureHeight);
                     }
                     catch (Exception var18)
                     {
@@ -196,7 +196,7 @@ public class ShaderGroup
                 }
             }
 
-            JsonArray var19 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(var2, "uniforms", (JsonArray)null);
+            JsonArray var19 = JsonUtils.getJsonObjectJsonArrayFieldOrDefault(pass, "uniforms", (JsonArray)null);
 
             if (var19 != null)
             {
@@ -277,13 +277,13 @@ public class ShaderGroup
         }
     }
 
-    public void addFramebuffer(String p_148020_1_, int p_148020_2_, int p_148020_3_)
+    public void addFramebuffer(String name, int width, int height)
     {
-        Framebuffer var4 = new Framebuffer(p_148020_2_, p_148020_3_, true);
+        Framebuffer var4 = new Framebuffer(width, height, true);
         var4.setFramebufferColor(0.0F, 0.0F, 0.0F, 0.0F);
-        this.mapFramebuffers.put(p_148020_1_, var4);
+        this.mapFramebuffers.put(name, var4);
 
-        if (p_148020_2_ == this.mainFramebufferWidth && p_148020_3_ == this.mainFramebufferHeight)
+        if (width == this.mainFramebufferWidth && height == this.mainFramebufferHeight)
         {
             this.listFramebuffers.add(var4);
         }
@@ -296,7 +296,7 @@ public class ShaderGroup
         while (var1.hasNext())
         {
             Framebuffer var2 = (Framebuffer)var1.next();
-            var2.deleteFramebuffer();
+            var2.delete();
         }
 
         var1 = this.listShaders.iterator();
@@ -321,8 +321,8 @@ public class ShaderGroup
     {
         this.projectionMatrix = new Matrix4f();
         this.projectionMatrix.setIdentity();
-        this.projectionMatrix.m00 = 2.0F / (float)this.mainFramebuffer.framebufferTextureWidth;
-        this.projectionMatrix.m11 = 2.0F / (float)(-this.mainFramebuffer.framebufferTextureHeight);
+        this.projectionMatrix.m00 = 2.0F / (float)this.mainFramebuffer.textureWidth;
+        this.projectionMatrix.m11 = 2.0F / (float)(-this.mainFramebuffer.textureHeight);
         this.projectionMatrix.m22 = -0.0020001999F;
         this.projectionMatrix.m33 = 1.0F;
         this.projectionMatrix.m03 = -1.0F;
@@ -332,8 +332,8 @@ public class ShaderGroup
 
     public void createBindFramebuffers(int p_148026_1_, int p_148026_2_)
     {
-        this.mainFramebufferWidth = this.mainFramebuffer.framebufferTextureWidth;
-        this.mainFramebufferHeight = this.mainFramebuffer.framebufferTextureHeight;
+        this.mainFramebufferWidth = this.mainFramebuffer.textureWidth;
+        this.mainFramebufferHeight = this.mainFramebuffer.textureHeight;
         this.resetProjectionMatrix();
         Iterator var3 = this.listShaders.iterator();
 
@@ -369,11 +369,8 @@ public class ShaderGroup
             ;
         }
 
-        Iterator var2 = this.listShaders.iterator();
-
-        while (var2.hasNext())
-        {
-            Shader var3 = (Shader)var2.next();
+        for (Object listShader : this.listShaders) {
+            Shader var3 = (Shader) listShader;
             var3.loadShader(this.field_148036_j / 20.0F);
         }
     }

@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.GL11;
 
 import javax.vecmath.Matrix4f;
-import java.util.Iterator;
 import java.util.List;
 
 public class Shader
@@ -16,12 +15,11 @@ public class Shader
     private final ShaderManager manager;
     public final Framebuffer framebufferIn;
     public final Framebuffer framebufferOut;
-    private final List listAuxFramebuffers = Lists.newArrayList();
-    private final List listAuxNames = Lists.newArrayList();
-    private final List listAuxWidths = Lists.newArrayList();
-    private final List listAuxHeights = Lists.newArrayList();
+    private final List<Framebuffer> listAuxFramebuffers = Lists.newArrayList();
+    private final List<String> listAuxNames = Lists.newArrayList();
+    private final List<Integer> listAuxWidths = Lists.newArrayList();
+    private final List<Integer> listAuxHeights = Lists.newArrayList();
     private Matrix4f projectionMatrix;
-    private static final String __OBFID = "CL_00001042";
 
     public Shader(IResourceManager p_i45089_1_, String p_i45089_2_, Framebuffer p_i45089_3_, Framebuffer p_i45089_4_) throws JsonException
     {
@@ -35,12 +33,12 @@ public class Shader
         this.manager.func_147988_a();
     }
 
-    public void addAuxFramebuffer(String p_148041_1_, Object p_148041_2_, int p_148041_3_, int p_148041_4_)
+    public void addAuxFramebuffer(String name, Framebuffer framebuffer, int width, int height)
     {
-        this.listAuxNames.add(this.listAuxNames.size(), p_148041_1_);
-        this.listAuxFramebuffers.add(this.listAuxFramebuffers.size(), p_148041_2_);
-        this.listAuxWidths.add(this.listAuxWidths.size(), Integer.valueOf(p_148041_3_));
-        this.listAuxHeights.add(this.listAuxHeights.size(), Integer.valueOf(p_148041_4_));
+        this.listAuxNames.add(name);
+        this.listAuxFramebuffers.add(framebuffer);
+        this.listAuxWidths.add(width);
+        this.listAuxHeights.add(height);
     }
 
     private void preLoadShader()
@@ -65,19 +63,19 @@ public class Shader
     {
         this.preLoadShader();
         this.framebufferIn.unbindFramebuffer();
-        float var2 = (float)this.framebufferOut.framebufferTextureWidth;
-        float var3 = (float)this.framebufferOut.framebufferTextureHeight;
+        float var2 = (float)this.framebufferOut.textureWidth;
+        float var3 = (float)this.framebufferOut.textureHeight;
         GL11.glViewport(0, 0, (int)var2, (int)var3);
         this.manager.func_147992_a("DiffuseSampler", this.framebufferIn);
 
         for (int var4 = 0; var4 < this.listAuxFramebuffers.size(); ++var4)
         {
-            this.manager.func_147992_a((String)this.listAuxNames.get(var4), this.listAuxFramebuffers.get(var4));
-            this.manager.func_147984_b("AuxSize" + var4).func_148087_a((float)((Integer)this.listAuxWidths.get(var4)).intValue(), (float)((Integer)this.listAuxHeights.get(var4)).intValue());
+            this.manager.func_147992_a(this.listAuxNames.get(var4), this.listAuxFramebuffers.get(var4));
+            this.manager.func_147984_b("AuxSize" + var4).func_148087_a((float) this.listAuxWidths.get(var4), (float) this.listAuxHeights.get(var4));
         }
 
         this.manager.func_147984_b("ProjMat").func_148088_a(this.projectionMatrix);
-        this.manager.func_147984_b("InSize").func_148087_a((float)this.framebufferIn.framebufferTextureWidth, (float)this.framebufferIn.framebufferTextureHeight);
+        this.manager.func_147984_b("InSize").func_148087_a((float)this.framebufferIn.textureWidth, (float)this.framebufferIn.textureHeight);
         this.manager.func_147984_b("OutSize").func_148087_a(var2, var3);
         this.manager.func_147984_b("Time").func_148090_a(p_148042_1_);
         Minecraft var8 = Minecraft.getMinecraft();
@@ -100,15 +98,10 @@ public class Shader
         this.manager.func_147993_b();
         this.framebufferOut.unbindFramebuffer();
         this.framebufferIn.unbindFramebufferTexture();
-        Iterator var6 = this.listAuxFramebuffers.iterator();
 
-        while (var6.hasNext())
-        {
-            Object var7 = var6.next();
-
-            if (var7 instanceof Framebuffer)
-            {
-                ((Framebuffer)var7).unbindFramebufferTexture();
+        for (Framebuffer var7 : this.listAuxFramebuffers) {
+            if (var7 != null) {
+                var7.unbindFramebufferTexture();
             }
         }
     }

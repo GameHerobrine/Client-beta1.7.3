@@ -6,6 +6,11 @@ import dozer.module.ModuleManager;
 import dozer.setting.SettingManager;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.SneakyThrows;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Objects;
 
 @Getter
 public class Dozer {
@@ -22,6 +27,7 @@ public class Dozer {
   private final CommandManager commandManager = new CommandManager();
   private final EventBus eventBus = new EventBus();
 
+  @SneakyThrows
   public void init() {
     System.out.println("Initializing DozerHack...");
 

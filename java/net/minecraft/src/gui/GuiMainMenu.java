@@ -6,6 +6,7 @@ package net.minecraft.src.gui;
 
 import dozer.Dozer;
 import dozer.util.chat.ChatColorUtil;
+import dozer.util.render.shader.Shader;
 import net.minecraft.src.Tessellator;
 import org.lwjgl.opengl.GL11;
 
@@ -22,26 +23,26 @@ public class GuiMainMenu extends GuiScreen {
   private final ChatColorUtil chatColorUtil = new ChatColorUtil();
   private float updateCounter;
   private String splashText;
-  private GuiButton multiplayerButton;
+  private final Shader shader = new Shader("vertex.glsl", "shader.glsl");
 
   public GuiMainMenu() {
     updateCounter = 0.0F;
     splashText = "missing";
-    try {
-      String[] splashTextArray = {
-        "DozerHack > All!",
-        "DozerHack owns you and all!",
-        "DozerHack is the best!",
-        "Nothing better then DozerHack!",
-        "DozerHack is back!",
-        "Sixene is a prick!",
-        "Since 2021!",
-        "DozerHack helps you get bitches!"
-      };
+    String[] splashTextArray = {
+      "DozerHack > All!",
+      "DozerHack owns you and all!",
+      "DozerHack is the best!",
+      "Nothing better then DozerHack!",
+      "DozerHack is back!",
+      "Sixene is a prick!",
+      "Since 2021!",
+      "DozerHack helps you get bitches!",
+      "Zǎoshang hǎo zhōngguó xiànzài wo you BING CHILLING",
+      "Marvin Heemeyer - very based",
+      "We are we are we are, the ones who make the night shine"
+    };
 
-      splashText = splashTextArray[rand.nextInt(splashTextArray.length)];
-    } catch (Exception exception) {
-    }
+    splashText = splashTextArray[rand.nextInt(splashTextArray.length)];
   }
 
   public void updateScreen() {
@@ -53,35 +54,32 @@ public class GuiMainMenu extends GuiScreen {
   public void initGui() {
     int i = height / 4 + 48;
     controlList.add(new GuiButton(1, width / 2 - 100, i, "Singleplayer"));
-    controlList.add(multiplayerButton = new GuiButton(2, width / 2 - 100, i + 24, "Multiplayer"));
+    controlList.add(new GuiButton(2, width / 2 - 100, i + 24, "Multiplayer"));
     controlList.add(new GuiButton(3, width / 2 - 100, i + 48, "Texture Packs"));
-    controlList.add(new GuiButton(0, width / 2 - 100, i + 72 + 12, 98, 20, "Options..."));
-    controlList.add(new GuiButton(5, width / 2 + 2, i + 72 + 12, 98, 20, "Quit"));
+    controlList.add(new GuiButton(4, width / 2 - 100, i + 72, "Options..."));
+    controlList.add(new GuiButton(5, width / 2 - 100, i + 96, "Quit"));
   }
 
   protected void actionPerformed(GuiButton guibutton) {
-    if (guibutton.id == 0) {
-      mc.displayGuiScreen(new GuiOptions(this, mc.gameSettings));
-    }
-    if (guibutton.id == 1) {
-      mc.displayGuiScreen(new GuiSelectWorld(this));
-    }
-    if (guibutton.id == 2) {
-      mc.displayGuiScreen(new GuiMultiplayer(this));
-    }
-    if (guibutton.id == 3) {
-      mc.displayGuiScreen(new GuiTexturePacks(this));
-    }
-    if (guibutton.id == 4) {
-      // TODO - Add alternate account UI
-    }
-    if (guibutton.id == 5) {
-      mc.shutdown();
+    switch (guibutton.id) {
+      case 1 -> mc.displayGuiScreen(new GuiSelectWorld(this));
+      case 2 -> mc.displayGuiScreen(new GuiMultiplayer(this));
+      case 3 -> mc.displayGuiScreen(new GuiTexturePacks(this));
+      case 4 -> mc.displayGuiScreen(new GuiOptions(this, mc.gameSettings));
+      case 5 -> mc.shutdown();
     }
   }
 
   public void drawScreen(int i, int j, float f) {
     drawDefaultBackground();
+
+    //not the best way of doing this
+    shader.useShader();
+    shader.setUniform2f("resolution", width, height);
+    shader.setUniform1f("time", (float) (System.currentTimeMillis() - shader.getInitTime()) / 2000F);
+    Gui.drawRect(0, 0, width, height, 0xFFFFFFFF);
+    shader.stopShader();
+
     Tessellator tessellator = Tessellator.instance;
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     tessellator.setColorOpaque_I(0xffffff);
