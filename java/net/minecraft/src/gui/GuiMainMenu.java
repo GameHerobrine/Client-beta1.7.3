@@ -41,7 +41,8 @@ public class GuiMainMenu extends GuiScreen {
       "DozerHack helps you get bitches!",
       "Zǎoshang hǎo zhōngguó xiànzài wo you BING CHILLING",
       "Marvin Heemeyer - very based",
-      "We are we are we are, the ones who make the night shine"
+      "We are we are we are, the ones who make the night shine",
+      "Stay noided!"
     };
 
     splashText = splashTextArray[rand.nextInt(splashTextArray.length)];
