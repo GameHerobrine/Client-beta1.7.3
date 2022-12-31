@@ -1,5 +1,6 @@
 package dozer.util.render;
 
+import dozer.Dozer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.gui.Gui;
@@ -43,6 +44,28 @@ public interface Render2DUtil {
      */
     default void drawStringWithShadow(String text, int x, int y, Color color) {
         fontRenderer().drawStringWithShadow(text, x, y, color.getRGB());
+    }
+
+
+    /**
+     *
+     * string with shadow using custom font renderer
+     *
+     * @param text string parameter
+     * @param x x coordinate
+     * @param y y coordinate
+     */
+    default void drawCustomStringWithShadow(String text, int x, int y, Color color) {
+        Dozer.getSingleton().getCustomFontRenderer().drawStringWithShadow(text, x, y, color);
+    }
+
+    /**
+     *
+     * @param text string parameter
+     * @return string width (integer)
+     */
+    default int getStringCustomWidth(String text) {
+        return Dozer.getSingleton().getCustomFontRenderer().getStringWidth(text);
     }
 
 }

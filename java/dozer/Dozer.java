@@ -2,12 +2,14 @@ package dozer;
 
 import dozer.command.CommandManager;
 import dozer.event.EventBus;
+import dozer.font.CustomFontRenderer;
 import dozer.module.ModuleManager;
 import dozer.setting.SettingManager;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Objects;
@@ -22,6 +24,7 @@ public class Dozer {
   @Setter
   private String prefix = ".";
 
+  private final CustomFontRenderer customFontRenderer = new CustomFontRenderer(new Font("Verdana", Font.PLAIN, 18), true, true);
   private final SettingManager settingManager = new SettingManager();
   private final ModuleManager moduleManager = new ModuleManager();
   private final CommandManager commandManager = new CommandManager();

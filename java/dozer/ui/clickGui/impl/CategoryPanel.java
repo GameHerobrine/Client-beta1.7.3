@@ -42,8 +42,8 @@ public class CategoryPanel extends Widget {
 
 
         drawRect(x, y, x + width, y + height, color);
-        drawStringWithShadow(category.getName(), x + 2,  y + 2, Color.WHITE);
-        drawStringWithShadow(extended ? "-" : "+",x + width - 10,  y + 2, Color.WHITE);
+        drawCustomStringWithShadow(category.getName(), x + 2,  y + 2, Color.WHITE);
+        drawCustomStringWithShadow(extended ? "-" : "+",x + width - 10,  y + 2, Color.WHITE);
 
         if (!extended) return;
         int count = 0;
