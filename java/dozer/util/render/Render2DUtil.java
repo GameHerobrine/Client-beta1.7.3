@@ -1,6 +1,8 @@
 package dozer.util.render;
 
 import dozer.Dozer;
+import dozer.font.Fonts;
+import dozer.font.TTFFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.gui.Gui;
@@ -56,7 +58,11 @@ public interface Render2DUtil {
      * @param y y coordinate
      */
     default void drawCustomStringWithShadow(String text, int x, int y, Color color) {
-        Dozer.getSingleton().getCustomFontRenderer().drawStringWithShadow(text, x, y, color);
+        try {
+            Fonts.getFont("roboto.ttf",16).drawStringWithShadow(text, x, y, color.getRGB());
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -65,7 +71,7 @@ public interface Render2DUtil {
      * @return string width (integer)
      */
     default int getStringCustomWidth(String text) {
-        return Dozer.getSingleton().getCustomFontRenderer().getStringWidth(text);
+        return (int)  Fonts.getFont("roboto.ttf",16).getWidth(text);
     }
 
 }

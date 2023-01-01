@@ -2,7 +2,8 @@ package dozer;
 
 import dozer.command.CommandManager;
 import dozer.event.EventBus;
-import dozer.font.CustomFontRenderer;
+import dozer.font.Fonts;
+import dozer.font.TTFFontRenderer;
 import dozer.module.ModuleManager;
 import dozer.setting.SettingManager;
 import lombok.Getter;
@@ -10,8 +11,6 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Objects;
 
 @Getter
@@ -23,8 +22,6 @@ public class Dozer {
 
   @Setter
   private String prefix = ".";
-
-  private final CustomFontRenderer customFontRenderer = new CustomFontRenderer(new Font("Verdana", Font.PLAIN, 18), true, true);
   private final SettingManager settingManager = new SettingManager();
   private final ModuleManager moduleManager = new ModuleManager();
   private final CommandManager commandManager = new CommandManager();
@@ -33,6 +30,9 @@ public class Dozer {
   @SneakyThrows
   public void init() {
     System.out.println("Initializing DozerHack...");
+
+
+    System.out.println(Objects.requireNonNull(Dozer.class.getClassLoader().getResourceAsStream("roboto.ttf")));
 
     moduleManager.init();
     commandManager.init();
