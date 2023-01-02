@@ -1,4 +1,4 @@
 package dozer.event.impl;
 
-public class Render3DEvent {
+public record Render3DEvent(float partialTicks) {
 }

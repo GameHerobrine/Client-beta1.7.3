@@ -4,6 +4,8 @@
 
 package net.minecraft.src.entity;
 
+import dozer.shader.GlStateManager;
+import dozer.shader.renderer.OpenGlHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import net.minecraft.src.item.ItemRenderer;
@@ -77,6 +79,8 @@ public class EntityRenderer {
   private float fogColor2;
   private float fogColor1;
 
+
+
   public EntityRenderer(Minecraft minecraft) {
     farPlaneDistance = 0.0F;
     pointedEntity = null;
@@ -111,6 +115,9 @@ public class EntityRenderer {
     itemRenderer = new ItemRenderer(minecraft);
   }
 
+
+
+
   public void updateRenderer() {
     fogColor2 = fogColor1;
     field_22227_s = field_22228_r;
@@ -132,6 +139,18 @@ public class EntityRenderer {
     rendererUpdateCount++;
     itemRenderer.updateEquippedItem();
     addRainParticles();
+  }
+
+  public void setupOverlayRendering()
+  {
+    ScaledResolution scaledresolution = new ScaledResolution(this.mc.gameSettings, this.mc.displayWidth, this.mc.displayHeight);
+    GlStateManager.clear(256);
+    GlStateManager.matrixMode(5889);
+    GlStateManager.loadIdentity();
+    GlStateManager.ortho(0.0D, scaledresolution.getScaledWidth(), scaledresolution.getScaledHeight(), 0.0D, 1000.0D, 3000.0D);
+    GlStateManager.matrixMode(5888);
+    GlStateManager.loadIdentity();
+    GlStateManager.translate(0.0F, 0.0F, -2000.0F);
   }
 
   public void getMouseOver(float partialTicks) {
@@ -372,7 +391,7 @@ public class EntityRenderer {
     cloudFog = mc.renderGlobal.func_27307_a(d, d1, d2, f);
   }
 
-  private void setupCameraTransform(float f, int i) {
+  public void setupCameraTransform(float f, int i) {
     farPlaneDistance = 256 >> mc.gameSettings.renderDistance;
     GL11.glMatrixMode(5889 /*GL_PROJECTION*/);
     GL11.glLoadIdentity();
@@ -532,6 +551,32 @@ public class EntityRenderer {
         mc.currentScreen.field_25091_h.func_25087_a(f);
       }
     }
+  }
+
+
+  public void disableLightmap()
+  {
+    GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+    GlStateManager.disableTexture2D();
+    GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+  }
+
+  public void enableLightmap()
+  {
+    GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+    GlStateManager.matrixMode(5890);
+    GlStateManager.loadIdentity();
+    float f = 0.00390625F;
+    GlStateManager.scale(0.00390625F, 0.00390625F, 0.00390625F);
+    GlStateManager.translate(8.0F, 8.0F, 8.0F);
+    GlStateManager.matrixMode(5888);
+    GlStateManager.glTexParameteri(3553, 10241, 9729);
+    GlStateManager.glTexParameteri(3553, 10240, 9729);
+    GlStateManager.glTexParameteri(3553, 10242, 10496);
+    GlStateManager.glTexParameteri(3553, 10243, 10496);
+    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+    GlStateManager.enableTexture2D();
+    GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
   }
 
   public void renderWorld(float f, long l) {

@@ -4,6 +4,7 @@
 
 package net.minecraft.src.render;
 
+import dozer.shader.renderer.OpenGlHelper;
 import net.minecraft.src.*;
 import net.minecraft.src.block.Block;
 import net.minecraft.src.entity.*;
@@ -106,6 +107,25 @@ public class RenderManager {
     }
     return render;
   }
+  public void renderEntityStatic(Entity entityIn, float partialTicks)
+  {
+    if (entityIn.ticksExisted == 0)
+    {
+      entityIn.lastTickPosX = entityIn.posX;
+      entityIn.lastTickPosY = entityIn.posY;
+      entityIn.lastTickPosZ = entityIn.posZ;
+    }
+
+    double d0 = entityIn.lastTickPosX + (entityIn.posX - entityIn.lastTickPosX) * (double)partialTicks;
+    double d1 = entityIn.lastTickPosY + (entityIn.posY - entityIn.lastTickPosY) * (double)partialTicks;
+    double d2 = entityIn.lastTickPosZ + (entityIn.posZ - entityIn.lastTickPosZ) * (double)partialTicks;
+    float f = entityIn.prevRotationYaw + (entityIn.rotationYaw - entityIn.prevRotationYaw) * partialTicks;
+
+
+    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    this.renderEntity(entityIn, partialTicks);
+  }
+
 
   public Render getEntityRenderObject(Entity entity) {
     return getEntityClassRenderObject(entity.getClass());

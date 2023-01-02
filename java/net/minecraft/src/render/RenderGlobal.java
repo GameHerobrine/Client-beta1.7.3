@@ -275,7 +275,7 @@ public class RenderGlobal implements WorldAccess {
 
   public void renderEntities(Vec3D vec3d, ICamera icamera, float f) {
 
-    Dozer.getSingleton().getEventBus().post(new Render3DEvent());
+    Dozer.getSingleton().getEventBus().post(new Render3DEvent(f));
 
 
     if (renderEntitiesStartupCounter > 0) {

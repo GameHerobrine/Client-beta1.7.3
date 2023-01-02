@@ -30,10 +30,6 @@ public class Dozer {
   @SneakyThrows
   public void init() {
     System.out.println("Initializing DozerHack...");
-
-
-    System.out.println(Objects.requireNonNull(Dozer.class.getClassLoader().getResourceAsStream("roboto.ttf")));
-
     moduleManager.init();
     commandManager.init();
     settingManager.init();
