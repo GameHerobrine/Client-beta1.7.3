@@ -115,9 +115,6 @@ public class EntityRenderer {
     itemRenderer = new ItemRenderer(minecraft);
   }
 
-
-
-
   public void updateRenderer() {
     fogColor2 = fogColor1;
     field_22227_s = field_22228_r;
@@ -596,9 +593,7 @@ public class EntityRenderer {
     double d2 =
         entityliving.lastTickPosZ + (entityliving.posZ - entityliving.lastTickPosZ) * (double) f;
     IChunkProvider ichunkprovider = mc.theWorld.getIChunkProvider();
-    if (ichunkprovider instanceof ChunkProviderLoadOrGenerate) {
-      ChunkProviderLoadOrGenerate chunkproviderloadorgenerate =
-          (ChunkProviderLoadOrGenerate) ichunkprovider;
+    if (ichunkprovider instanceof ChunkProviderLoadOrGenerate chunkproviderloadorgenerate) {
       int j = MathHelper.floor_float((int) d) >> 4;
       int k = MathHelper.floor_float((int) d2) >> 4;
       chunkproviderloadorgenerate.setCurrentChunkOver(j, k);
@@ -653,8 +648,7 @@ public class EntityRenderer {
       effectrenderer.renderParticles(entityliving, f);
       if (mc.objectMouseOver != null
           && entityliving.isInsideOfMaterial(Material.water)
-          && (entityliving instanceof EntityPlayer)) {
-        EntityPlayer entityplayer = (EntityPlayer) entityliving;
+          && (entityliving instanceof EntityPlayer entityplayer)) {
         GL11.glDisable(3008 /*GL_ALPHA_TEST*/);
         renderglobal.drawBlockBreaking(
             entityplayer, mc.objectMouseOver, 0, entityplayer.inventory.getCurrentItem(), f);

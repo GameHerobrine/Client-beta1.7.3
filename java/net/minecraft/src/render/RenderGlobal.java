@@ -324,13 +324,13 @@ public class RenderGlobal implements WorldAccess {
       }
     }
 
-    for (int j = 0; j < list.size(); j++) {
-      Entity entity1 = (Entity) list.get(j);
+    for (Object o : list) {
+      Entity entity1 = (Entity) o;
       if (!entity1.isInRangeToRenderVec3D(vec3d)
           || !entity1.ignoreFrustumCheck && !icamera.isBoundingBoxInFrustum(entity1.boundingBox)
           || entity1 == mc.renderViewEntity
-              && !mc.gameSettings.thirdPersonView
-              && !mc.renderViewEntity.isPlayerSleeping()) {
+          && !mc.gameSettings.thirdPersonView
+          && !mc.renderViewEntity.isPlayerSleeping()) {
         continue;
       }
       int l = MathHelper.floor_double(entity1.posY);

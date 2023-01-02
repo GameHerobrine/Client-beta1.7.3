@@ -7,23 +7,13 @@ import net.minecraft.client.Minecraft;
 import static org.lwjgl.opengl.GL20.*;
 
 
-public class OutlineShader extends MedShader {
+public class OutlineShader extends Shader {
     private Color color = Color.white;
     private float lineWidth = 1.5f;
     Minecraft mc = Minecraft.getMinecraft();
 
     public OutlineShader() {
-        super("/shaders/esp/outline.fsh", "shaders/esp/vertex.fsh");
-    }
-
-    @Override
-    protected void onInitialize() {
-        createUniform("texture");
-        createUniform("texelSize");
-        createUniform("color");
-        createUniform("divider");
-        createUniform("radius");
-        createUniform("maxSample");
+        super("shaders/esp/vertex.fsh", "shaders/esp/outline.fsh");
     }
 
     public void updateUniforms() {

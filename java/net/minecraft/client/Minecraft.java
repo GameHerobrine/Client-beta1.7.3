@@ -576,6 +576,7 @@ public abstract class Minecraft implements Runnable {
             displayGuiScreen(new GuiConflictWarning());
           }
 
+          framebuffer.bindFramebuffer(true);
           long l2 = System.nanoTime() - l1;
           checkGLError("Pre render");
           RenderBlocks.fancyGrass = gameSettings.fancyGraphics;
@@ -627,6 +628,8 @@ public abstract class Minecraft implements Runnable {
             resize(displayWidth, displayHeight);
           }
           checkGLError("Post render");
+          framebuffer.unbindFramebuffer();
+          framebuffer.framebufferRender(displayWidth, displayHeight);
           i++;
           isGamePaused =
               !isMultiplayerWorld() && currentScreen != null && currentScreen.doesGuiPauseGame();
@@ -911,6 +914,17 @@ public abstract class Minecraft implements Runnable {
       int k = scaledresolution.getScaledWidth();
       int l = scaledresolution.getScaledHeight();
       currentScreen.setWorldAndResolution(this, k, l);
+    }
+    this.updateFramebufferSize();
+  }
+
+  private void updateFramebufferSize()
+  {
+    this.framebuffer.createBindFramebuffer(this.displayWidth, this.displayHeight);
+
+    if (this.entityRenderer != null)
+    {
+//      this.entityRenderer.updateShaderGroupSize(this.displayWidth, this.displayHeight);
     }
   }
 
