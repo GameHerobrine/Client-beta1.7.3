@@ -135,6 +135,7 @@ public class FontRenderer {
       k = (k & 0xfcfcfc) >> 2;
       k += l;
     }
+    GL11.glEnable(GL11.GL_ALPHA_TEST);
     GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, fontTextureName);
     float f = (float) (k >> 16 & 0xff) / 255F;
     float f1 = (float) (k >> 8 & 0xff) / 255F;
