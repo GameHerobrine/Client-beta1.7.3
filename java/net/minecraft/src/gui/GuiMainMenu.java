@@ -7,7 +7,7 @@ package net.minecraft.src.gui;
 import dozer.Dozer;
 import dozer.systems.module.impl.client.MainMenu;
 import dozer.util.chat.ChatColorUtil;
-import dozer.util.render.shader.Shader;
+import dozer.util.render.shader.ShaderUtil;
 import net.minecraft.src.Tessellator;
 import org.lwjgl.opengl.GL11;
 
@@ -24,7 +24,7 @@ public class GuiMainMenu extends GuiScreen {
   private final ChatColorUtil chatColorUtil = new ChatColorUtil();
   private float updateCounter;
   private String splashText;
-  private final Shader shader = new Shader("shaders/vertex.glsl", "shaders/shader.glsl");
+  private final ShaderUtil shader = new ShaderUtil("shaders/vertex.glsl", "shaders/shader.glsl");
   private final boolean customButtons;
 
   public GuiMainMenu() {

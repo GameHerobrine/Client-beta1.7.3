@@ -1,19 +1,19 @@
 package dozer.util.render.shader;
 
-import java.awt.Color;
+import java.awt.*;
 
 import net.minecraft.client.Minecraft;
 
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL20.glUniform1f;
 
-
-public class OutlineShader extends ShaderUtil {
+public class FillShader extends ShaderUtil {
     private Color color = Color.white;
     private float lineWidth = 1.5f;
     Minecraft mc = Minecraft.getMinecraft();
 
-    public OutlineShader() {
-        super("shaders/esp/vertex.fsh", "shaders/esp/outline.fsh");
+    public FillShader() {
+        super("shaders/esp/vertex.fsh","shaders/esp/fill.fsh");
     }
 
     public void updateUniforms() {
