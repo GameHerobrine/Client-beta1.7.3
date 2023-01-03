@@ -1,20 +1,23 @@
 package dozer.ui.clickGui.impl;
 
+import dozer.util.ClientUtil;
 import dozer.util.render.Render2DUtil;
 import java.awt.*;
 
-public abstract class Widget implements Render2DUtil {
+public abstract class Widget<T> implements Render2DUtil, ClientUtil {
 
     public int x, y, width, height;
     public Color color;
+    public T type;
 
 
-    public Widget(int x, int y, int width, int height, Color color) {
+    public Widget(T type, int x, int y, int width, int height, Color color) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.color = color;
+        this.type = type;
     }
 
     public abstract void drawScreen(int mouseX, int mouseY, float partialTicks);

@@ -1,28 +1,21 @@
 package dozer.ui.clickGui.impl;
 
 import dozer.Dozer;
-import dozer.module.Module;
-import dozer.module.ModuleCategory;
-import dozer.ui.clickGui.ClickGUI;
-import net.minecraft.client.Minecraft;
-import net.minecraft.src.MathHelper;
-import net.minecraft.src.gui.Gui;
+import dozer.systems.module.ModuleCategory;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CategoryPanel extends Widget {
+public class CategoryPanel extends Widget<ModuleCategory> {
 
-    private final ModuleCategory category;
-    public List<ModuleButton> buttons = new ArrayList<ModuleButton>();
+    public List<ModuleButton> buttons = new ArrayList<>();
     private boolean extended, dragging;
     private int startingX, startingY;
 
     public CategoryPanel(ModuleCategory category, int x, int y, int width, int height, Color color) {
-        super(x, y, width, height, color);
-        this.category = category;
+        super(category, x, y, width, height, color);
 
         AtomicInteger count = new AtomicInteger(1);
 
@@ -42,7 +35,7 @@ public class CategoryPanel extends Widget {
 
 
         drawRect(x, y, x + width, y + height, color);
-        drawStringWithShadow(category.getName(), x + 2,  y + 2, Color.WHITE);
+        drawStringWithShadow(type.getName(), x + 2,  y + 2, Color.WHITE);
         drawStringWithShadow(extended ? "-" : "+",x + width - 10,  y + 2, Color.WHITE);
 
         if (!extended) return;

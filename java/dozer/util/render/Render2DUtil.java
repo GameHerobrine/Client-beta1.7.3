@@ -1,16 +1,13 @@
 package dozer.util.render;
 
-import dozer.Dozer;
-import dozer.font.Fonts;
-import dozer.font.TTFFontRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
+import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.gui.Gui;
 
 import java.awt.*;
 
 public interface Render2DUtil {
-
 
     /**
      * returns minecraft font renderer
@@ -48,30 +45,8 @@ public interface Render2DUtil {
         fontRenderer().drawStringWithShadow(text, x, y, color.getRGB());
     }
 
-
-    /**
-     *
-     * string with shadow using custom font renderer
-     *
-     * @param text string parameter
-     * @param x x coordinate
-     * @param y y coordinate
-     */
-    default void drawCustomStringWithShadow(String text, int x, int y, Color color) {
-        try {
-            Fonts.getFont("roboto.ttf",16).drawStringWithShadow(text, x, y, color.getRGB());
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     *
-     * @param text string parameter
-     * @return string width (integer)
-     */
-    default int getStringCustomWidth(String text) {
-        return (int)  Fonts.getFont("roboto.ttf",16).getWidth(text);
+    default ScaledResolution scaledResolution() {
+        return new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
     }
 
 }

@@ -5,7 +5,7 @@
 package net.minecraft.src.gui;
 
 import dozer.Dozer;
-import dozer.module.impl.client.MainMenu;
+import dozer.systems.module.impl.client.MainMenu;
 import dozer.util.chat.ChatColorUtil;
 import dozer.util.render.shader.Shader;
 import net.minecraft.src.Tessellator;

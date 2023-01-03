@@ -386,13 +386,15 @@ public abstract class Minecraft implements Runnable {
     checkGLError("Post startup");
     ingameGUI = new GuiIngame(this);
 
-    Dozer.getSingleton().init();
 
     if (serverName != null) {
       displayGuiScreen(new GuiConnecting(this, serverName, serverPort));
     } else {
       displayGuiScreen(new GuiMainMenu());
     }
+
+
+    Dozer.getSingleton().init();
   }
 
   private void loadScreen() throws LWJGLException {
