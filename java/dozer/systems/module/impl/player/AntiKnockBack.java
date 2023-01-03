@@ -15,8 +15,7 @@ public class AntiKnockBack extends Module {
         if (mc.thePlayer == null) {
             return;
         }
-        if (event.getPacket() instanceof Packet28EntityVelocity) {
-            Packet28EntityVelocity packet = (Packet28EntityVelocity) event.getPacket();
+        if (event.getPacket() instanceof Packet28EntityVelocity packet) {
             if (packet.entityId == mc.thePlayer.entityId) {
                 event.setCancelled(true);
             }

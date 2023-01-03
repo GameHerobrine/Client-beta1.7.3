@@ -7,7 +7,11 @@ import dozer.systems.module.Module;
 import dozer.shader.Framebuffer;
 import dozer.systems.module.ModuleCategory;
 import dozer.systems.module.ModuleInfo;
+import dozer.systems.setting.Serialize;
+import dozer.systems.setting.annotation.Mode;
+import dozer.util.render.shader.FillShader;
 import dozer.util.render.shader.OutlineShader;
+import dozer.util.render.shader.ShaderUtil;
 import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.entity.*;
 import net.minecraft.src.render.RenderManager;
@@ -17,16 +21,28 @@ import java.awt.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
-// Big shoutout to Aestheticall <3333
+/**
+ * @author Signam, MedMex & Eternal
+ */
 @ModuleInfo(name = "ShaderESP", description = "Draws esp", category = ModuleCategory.RENDER)
 public class Shader extends Module {
 
-  public static Shader instance;
+
+
+  @Serialize(name = "Mode")
+  @Mode(modes = {
+          "Outline",
+          "Shader"
+  })
+  public String mode = "Outline";
 
   private Framebuffer framebuffer;
   private int w, h, s;
 
   private final OutlineShader outlineShader = new OutlineShader();
+  private final FillShader fillShader = new FillShader();
+
+
 
   @Subscribe
   public void onRender(Render3DEvent event) {
@@ -77,11 +93,28 @@ public class Shader extends Module {
 
   @Subscribe
   public void onRender2D(Render2DEvent event) {
-    outlineShader.setColor(new Color(0xFFAA0000));
-    outlineShader.setLineWidth(1);
 
-    outlineShader.useShader();
-    outlineShader.updateUniforms();
+    ShaderUtil shader = null;
+
+    switch (mode) {
+      case "Outline" -> {
+        shader = outlineShader;
+
+        outlineShader.setColor(new Color(0xFFAA0000));
+        outlineShader.setLineWidth(1);
+        outlineShader.useShader();
+        outlineShader.updateUniforms();
+      }
+      case "Fill" -> {
+        shader = fillShader;
+
+        fillShader.setColor(new Color(0xFFAA0000));
+        fillShader.setLineWidth(1);
+        fillShader.useShader();
+        fillShader.updateUniforms();
+      }
+    }
+
     ScaledResolution res = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
     glBindTexture(GL_TEXTURE_2D, framebuffer.texture);
     glBegin(GL_QUADS);
@@ -94,7 +127,7 @@ public class Shader extends Module {
     glTexCoord2d(1, 1);
     glVertex2d(res.getScaledWidth(), 0);
     glEnd();
-    outlineShader.stopShader();
+    shader.stopShader();
   }
 
   public boolean isValid(Entity e) {

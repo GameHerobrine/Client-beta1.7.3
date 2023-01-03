@@ -16,7 +16,6 @@ import org.lwjgl.input.Keyboard;
 @ModuleInfo(name = "FreeCam", description = "Allows you to move out of your body.", category = ModuleCategory.MISC)
 public class FreeCam extends Module {
 
-    private final MovementUtil movementUtil = new MovementUtil();
 
     private double x, y, z;
     private float yaw, pitch;
@@ -32,7 +31,7 @@ public class FreeCam extends Module {
 
     @Override
     public void onDisable() {
-        movementUtil.setSpeed(0.0);
+        MovementUtil.setSpeed(0.0);
         mc.thePlayer.setPosition(x, y, z);
         mc.thePlayer.rotationYaw = yaw;
         mc.thePlayer.rotationPitch = pitch;
@@ -50,7 +49,7 @@ public class FreeCam extends Module {
             mc.thePlayer.motionY -= 0.25;
         }
         if (mc.thePlayer.movementInput.moveForward != 0 || mc.thePlayer.movementInput.moveStrafe != 0) {
-            movementUtil.setSpeed(0.25);
+            MovementUtil.setSpeed(0.25);
         }
     }
 
