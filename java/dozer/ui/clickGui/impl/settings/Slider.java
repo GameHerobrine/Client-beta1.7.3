@@ -18,8 +18,6 @@ public class Slider extends Widget<SettingSlider> {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-
-
         if (dragging) {
             double diff = mouseX - (this.x);
             double min = type.min();
