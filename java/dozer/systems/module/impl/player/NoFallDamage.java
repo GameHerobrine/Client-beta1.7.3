@@ -18,6 +18,7 @@ public class NoFallDamage extends Module {
         if (mc.theWorld.multiplayerWorld) {
             if (mc.thePlayer.fallDistance > 2.5F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder() && !mc.thePlayer.isInWater() && !mc.thePlayer.isRiding() && timer.hasReached(100L)) {
                 mc.getSendQueue().addToSendQueue(new Packet10Flying(true));
+                mc.thePlayer.fallDistance = 0.0F;
                 timer.reset();
             }
         } else {

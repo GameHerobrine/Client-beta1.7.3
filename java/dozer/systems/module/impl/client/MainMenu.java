@@ -3,7 +3,7 @@ package dozer.systems.module.impl.client;
 import dozer.systems.module.ModuleCategory;
 import dozer.systems.module.ModuleInfo;
 import dozer.systems.module.Module;
-import dozer.setting.annotation.CheckBox;
+import dozer.systems.setting.annotation.CheckBox;
 import dozer.systems.setting.Serialize;
 
 
