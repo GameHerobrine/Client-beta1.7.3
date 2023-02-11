@@ -2,7 +2,7 @@ package dozer.systems.module.impl.client;
 
 import dozer.systems.module.ModuleCategory;
 import dozer.ui.hudEditor.HudScreen;
-import dozer.util.chat.ChatColorUtil;
+import dozer.util.chat.UtilChatColor;
 import net.minecraft.src.gui.GuiChat;
 import dozer.systems.module.ModuleInfo;
 import dozer.systems.module.Module;
@@ -12,12 +12,13 @@ import java.util.Comparator;
 @ModuleInfo(name = "HUD", description = "Displays the HUD.", category = ModuleCategory.CLIENT)
 public class ModuleHUD extends Module {
 
-    private final ChatColorUtil chatColorUtil = new ChatColorUtil();
+    private final UtilChatColor chatColorUtil = new UtilChatColor();
 
 
     @Override
     public void onEnable() {
         mc.displayGuiScreen(new HudScreen());
+        this.toggle();
     }
 
 

@@ -1,10 +1,10 @@
 package dozer.ui.clickGui.impl;
 
-import dozer.util.ClientUtil;
-import dozer.util.render.Render2DUtil;
+import dozer.util.UtilClient;
+import dozer.util.render.UtilRender2D;
 import java.awt.*;
 
-public abstract class Widget<T> implements Render2DUtil, ClientUtil {
+public abstract class Widget<T> implements UtilRender2D, UtilClient {
 
     public int x, y, width, height;
     public Color color;

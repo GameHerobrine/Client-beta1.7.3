@@ -13,9 +13,8 @@ public class CheckBox extends Widget<SettingCheckBox> {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-
         drawRect(x, y, x + width, y + height, color);
-        drawStringWithShadow(type.getName(), x + 2, y + 2, Color.WHITE);
+        drawStringWithShadow(type.getName(), x + 2, y + 3, Color.WHITE);
         drawStringWithShadow(type.getValue() + "", x + 100 - fontRenderer().getStringWidth(type.getValue() + "") - 2, this.y + 3, Color.WHITE);
     }
 

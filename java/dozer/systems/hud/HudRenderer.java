@@ -1,14 +1,12 @@
 package dozer.systems.hud;
 
-import dozer.Dozer;
 import dozer.event.Subscribe;
 import dozer.event.impl.Render2DEvent;
 import dozer.ui.hudEditor.HudScreen;
-import dozer.util.ClientUtil;
-import dozer.util.MinecraftUtil;
+import dozer.util.UtilClient;
 import net.minecraft.client.Minecraft;
 
-public class HudRenderer implements ClientUtil {
+public class HudRenderer implements UtilClient {
 
 
     public void init() {

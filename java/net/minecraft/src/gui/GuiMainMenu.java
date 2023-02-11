@@ -6,8 +6,8 @@ package net.minecraft.src.gui;
 
 import dozer.Dozer;
 import dozer.systems.module.impl.client.ModuleMainMenu;
-import dozer.util.chat.ChatColorUtil;
-import dozer.util.render.shader.ShaderUtil;
+import dozer.util.chat.UtilChatColor;
+import dozer.util.render.shader.UtilShader;
 import net.minecraft.src.Tessellator;
 import org.lwjgl.opengl.GL11;
 
@@ -21,10 +21,10 @@ import java.util.Random;
 public class GuiMainMenu extends GuiScreen {
 
   private static final Random rand = new Random();
-  private final ChatColorUtil chatColorUtil = new ChatColorUtil();
+  private final UtilChatColor chatColorUtil = new UtilChatColor();
   private float updateCounter;
   private String splashText;
-  private final ShaderUtil shader = new ShaderUtil("shaders/vertex.glsl", "shaders/shader.glsl");
+  private final UtilShader shader = new UtilShader("shaders/vertex.glsl", "shaders/shader.glsl");
   private final boolean customButtons;
 
   public GuiMainMenu() {

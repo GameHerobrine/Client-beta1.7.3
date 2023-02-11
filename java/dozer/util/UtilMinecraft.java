@@ -6,7 +6,7 @@ import net.minecraft.src.world.World;
 
 import java.util.Optional;
 
-public interface MinecraftUtil {
+public interface UtilMinecraft {
 
 
     Minecraft mc = Minecraft.getMinecraft();

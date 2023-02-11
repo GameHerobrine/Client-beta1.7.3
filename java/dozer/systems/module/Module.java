@@ -1,11 +1,11 @@
 package dozer.systems.module;
 
 import dozer.Dozer;
-import dozer.util.MinecraftUtil;
+import dozer.util.UtilMinecraft;
 import lombok.Data;
 
 @Data
-public class Module implements MinecraftUtil {
+public class Module implements UtilMinecraft {
 
   protected String name, description, suffix;
   protected ModuleCategory category;

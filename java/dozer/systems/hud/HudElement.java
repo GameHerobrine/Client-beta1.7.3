@@ -1,13 +1,13 @@
 package dozer.systems.hud;
 
-import dozer.util.MinecraftUtil;
-import dozer.util.render.Render2DUtil;
+import dozer.util.UtilMinecraft;
+import dozer.util.render.UtilRender2D;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class HudElement implements MinecraftUtil, Render2DUtil {
+public abstract class HudElement implements UtilMinecraft, UtilRender2D {
 
     String name, description;
     int x, y, width, height;

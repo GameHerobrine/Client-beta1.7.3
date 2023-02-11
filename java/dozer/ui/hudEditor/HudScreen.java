@@ -1,15 +1,14 @@
 package dozer.ui.hudEditor;
 
-import dozer.systems.hud.HudElement;
 import dozer.ui.hudEditor.impl.HudElementWidget;
 import dozer.ui.hudEditor.impl.HudPanel;
-import dozer.util.ClientUtil;
+import dozer.util.UtilClient;
 import net.minecraft.src.gui.GuiScreen;
 
 import java.awt.*;
 import java.util.LinkedList;
 
-public class HudScreen extends GuiScreen implements ClientUtil {
+public class HudScreen extends GuiScreen implements UtilClient {
 
     public HudPanel hudPanel;
     LinkedList<HudElementWidget> hudElements = new LinkedList<>();
@@ -27,7 +26,6 @@ public class HudScreen extends GuiScreen implements ClientUtil {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-
         hudPanel.drawScreen(mouseX, mouseY, partialTicks);
 
         hudElements.forEach(hudElementWidget -> hudElementWidget.drawScreen(mouseX, mouseY, partialTicks));
@@ -37,7 +35,6 @@ public class HudScreen extends GuiScreen implements ClientUtil {
 
     @Override
     protected void keyTyped(char character, int keyCode) {
-
         hudPanel.keyTyped(character, keyCode);
 
         hudElements.forEach(hudElementWidget -> hudElementWidget.keyTyped(character, keyCode));
@@ -47,8 +44,6 @@ public class HudScreen extends GuiScreen implements ClientUtil {
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-
-
         hudPanel.mouseClicked(mouseX, mouseY, mouseButton);
 
         hudElements.forEach(hudElementWidget -> hudElementWidget.mouseClicked(mouseX, mouseY, mouseButton));
@@ -58,12 +53,17 @@ public class HudScreen extends GuiScreen implements ClientUtil {
 
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
-
         hudPanel.mouseReleased(mouseX, mouseY, state);
 
         hudElements.forEach(hudElementWidget -> hudElementWidget.mouseReleased(mouseX, mouseY, state));
 
         super.mouseReleased(mouseX, mouseY, state);
+    }
+
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+
     }
 
     @Override

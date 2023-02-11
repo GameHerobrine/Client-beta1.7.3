@@ -6,7 +6,7 @@ import dozer.event.impl.UpdateEvent;
 import dozer.systems.module.Module;
 import dozer.systems.module.ModuleCategory;
 import dozer.systems.module.ModuleInfo;
-import dozer.util.player.MovementUtil;
+import dozer.util.player.UtilMovement;
 import net.minecraft.src.network.packets.Packet0KeepAlive;
 import net.minecraft.src.network.packets.Packet11PlayerPosition;
 import net.minecraft.src.network.packets.Packet12PlayerLook;
@@ -31,7 +31,7 @@ public class ModuleFreeCam extends Module {
 
     @Override
     public void onDisable() {
-        MovementUtil.setSpeed(0.0);
+        UtilMovement.setSpeed(0.0);
         mc.thePlayer.setPosition(x, y, z);
         mc.thePlayer.rotationYaw = yaw;
         mc.thePlayer.rotationPitch = pitch;
@@ -49,7 +49,7 @@ public class ModuleFreeCam extends Module {
             mc.thePlayer.motionY -= 0.25;
         }
         if (mc.thePlayer.movementInput.moveForward != 0 || mc.thePlayer.movementInput.moveStrafe != 0) {
-            MovementUtil.setSpeed(0.25);
+            UtilMovement.setSpeed(0.25);
         }
     }
 

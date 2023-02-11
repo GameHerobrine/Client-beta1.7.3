@@ -1,9 +1,8 @@
 package dozer.systems.command;
 
-import dozer.util.MinecraftUtil;
-import dozer.util.chat.ChatColorUtil;
+import dozer.util.UtilMinecraft;
 
-public abstract class Command implements MinecraftUtil {
+public abstract class Command implements UtilMinecraft {
 
     String name, description;
     CommandInfo commandInfo = getClass().getAnnotation(CommandInfo.class);

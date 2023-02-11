@@ -7,13 +7,13 @@ import dozer.systems.module.Module;
 import dozer.systems.module.ModuleCategory;
 import dozer.systems.module.ModuleInfo;
 import dozer.systems.module.impl.movement.ModuleFlight;
-import dozer.util.misc.TimerUtil;
+import dozer.util.misc.UtilTimer;
 import net.minecraft.src.network.packets.Packet10Flying;
 
 @ModuleInfo(name = "NoFallDamage", description = "Prevents you from taking fall damage.", category = ModuleCategory.PLAYER)
 public class ModuleNoFallDamage extends Module {
 
-    private final TimerUtil timer = new TimerUtil();
+    private final UtilTimer timer = new UtilTimer();
 
     @Subscribe
     public void onUpdate(final UpdateEvent event) {

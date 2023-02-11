@@ -29,16 +29,25 @@ public class Slider extends Widget<SettingSlider> {
                 double newValue = this.roundToPlace(((diff / (100)) * (max - min) + min));
                 newValue = this.roundToIncrement(newValue, type.increment());
 
-                if (newValue > type.max() || newValue < type.min()) newValue = type.min();
+                if (newValue > type.max()) newValue = type.max();
+
+                if (newValue < type.min()) newValue = type.min();
 
                 type.setValue(newValue);
             }
         }
 
         drawRect(x, y, x + 100, y + 14, new Color(16, 16, 16, 200));
-        drawRect(x, y + 13, (int) (x + (type.getValue() / type.max() * 100)), y + 14, new Color(255, 255, 255, 200));
+        drawRect(x, y + 13, (int) (x + (width * getPercentage())), y + 14, new Color(255, 255, 255, 200));
         drawStringWithShadow(type.getName(), this.x + 2, this.y + 3, Color.WHITE);
         drawStringWithShadow(type.getValue() + "", this.x + 100 - fontRenderer().getStringWidth(type.getValue() + "") - 2, this.y + 2, Color.WHITE);
+    }
+
+    private double getPercentage(){
+        double d = (100) / (this.type.max() - this.type.min());
+        double barWidth = d * this.type.getValue() - d * this.type.min();
+
+        return barWidth / 100;
     }
 
     public double roundToPlace(double value) {
@@ -53,8 +62,6 @@ public class Slider extends Widget<SettingSlider> {
         bd = bd.setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
-
-
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {

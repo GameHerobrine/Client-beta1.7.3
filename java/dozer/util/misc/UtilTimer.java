@@ -1,6 +1,6 @@
 package dozer.util.misc;
 
-public class TimerUtil {
+public class UtilTimer {
 
     private long lastMS = 0L;
 

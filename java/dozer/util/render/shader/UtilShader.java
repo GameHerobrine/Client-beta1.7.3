@@ -11,7 +11,7 @@ import java.nio.FloatBuffer;
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 
 @Getter
-public class ShaderUtil {
+public class UtilShader {
 
   private final int programID;
   private final int vertexID;
@@ -19,9 +19,9 @@ public class ShaderUtil {
   private final long initTime = System.currentTimeMillis();
 
   @SneakyThrows
-  public ShaderUtil(String vertex, String fragment) {
-    vertexID = loadShader(ShaderUtil.class.getClassLoader().getResourceAsStream(vertex), GL20.GL_VERTEX_SHADER);
-    fragmentID = loadShader(ShaderUtil.class.getClassLoader().getResourceAsStream(fragment), GL20.GL_FRAGMENT_SHADER);
+  public UtilShader(String vertex, String fragment) {
+    vertexID = loadShader(UtilShader.class.getClassLoader().getResourceAsStream(vertex), GL20.GL_VERTEX_SHADER);
+    fragmentID = loadShader(UtilShader.class.getClassLoader().getResourceAsStream(fragment), GL20.GL_FRAGMENT_SHADER);
     programID = GL20.glCreateProgram();
     GL20.glAttachShader(programID, vertexID);
     GL20.glAttachShader(programID, fragmentID);
