@@ -93,14 +93,17 @@ public class ModuleManager {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-
-
     /**
-     * Gets enabled modules.
-     *
-     * @return modules.
+     * @return a list of enabled modules
      */
-    public List<Module> getEnabledModules() {
-        return moduleList.stream().filter(Module::isToggled).collect(Collectors.toList());
+    public CopyOnWriteArrayList<Module> getEnabledModules() {
+        CopyOnWriteArrayList<Module> modules = new CopyOnWriteArrayList<>();
+        for (Module module : moduleList) {
+            if (module.isToggled()) {
+                modules.add(module);
+            }
+        }
+        return modules;
     }
+
 }

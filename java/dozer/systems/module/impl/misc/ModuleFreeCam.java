@@ -14,7 +14,7 @@ import net.minecraft.src.network.packets.Packet13PlayerLookMove;
 import org.lwjgl.input.Keyboard;
 
 @ModuleInfo(name = "FreeCam", description = "Allows you to move out of your body.", category = ModuleCategory.MISC)
-public class FreeCam extends Module {
+public class ModuleFreeCam extends Module {
 
 
     private double x, y, z;

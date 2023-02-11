@@ -10,7 +10,7 @@ import net.minecraft.src.MathHelper;
 import org.lwjgl.input.Keyboard;
 
 @ModuleInfo(name = "Flight", description = "Allows you to fly.", category = ModuleCategory.MOVEMENT)
-public class Flight extends Module {
+public class ModuleFlight extends Module {
 
 
 

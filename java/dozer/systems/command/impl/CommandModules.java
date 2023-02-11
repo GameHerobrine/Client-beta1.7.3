@@ -4,13 +4,12 @@ import dozer.Dozer;
 import dozer.systems.command.Command;
 import dozer.systems.command.CommandInfo;
 import dozer.systems.module.Module;
-import dozer.util.chat.ChatColorUtil;
 import dozer.util.chat.ChatPrintUtil;
 
 import java.util.stream.Collectors;
 
 @CommandInfo(name = "modules", description = "Lists all modules")
-public class ModulesCommand extends Command {
+public class CommandModules extends Command {
 
     @Override
     public void execute(String[] args) {

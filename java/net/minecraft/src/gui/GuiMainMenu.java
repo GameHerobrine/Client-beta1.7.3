@@ -5,7 +5,7 @@
 package net.minecraft.src.gui;
 
 import dozer.Dozer;
-import dozer.systems.module.impl.client.MainMenu;
+import dozer.systems.module.impl.client.ModuleMainMenu;
 import dozer.util.chat.ChatColorUtil;
 import dozer.util.render.shader.ShaderUtil;
 import net.minecraft.src.Tessellator;
@@ -47,7 +47,7 @@ public class GuiMainMenu extends GuiScreen {
 
     splashText = splashTextArray[rand.nextInt(splashTextArray.length)];
 
-    customButtons = MainMenu.buttons;
+    customButtons = ModuleMainMenu.buttons;
   }
 
   public void updateScreen() {
@@ -80,7 +80,7 @@ public class GuiMainMenu extends GuiScreen {
 
     //not the best way of doing this
 
-    if (Dozer.getSingleton().getModuleManager().getModuleByClass(MainMenu.class).isToggled()) {
+    if (Dozer.getSingleton().getModuleManager().getModuleByClass(ModuleMainMenu.class).isToggled()) {
       shader.useShader();
       shader.setUniform2f("resolution", width, height);
       shader.setUniform1f("time", (float) (System.currentTimeMillis() - shader.getInitTime()) / 2000F);

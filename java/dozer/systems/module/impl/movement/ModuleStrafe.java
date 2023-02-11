@@ -10,7 +10,7 @@ import dozer.util.player.MovementUtil;
 import net.minecraft.src.MathHelper;
 
 @ModuleInfo(name = "Strafe", description = "Allows you to strafe.", category = ModuleCategory.MOVEMENT)
-public class Strafe extends Module {
+public class ModuleStrafe extends Module {
 
     @Subscribe
     public void onUpdate(final UpdateEvent event) {

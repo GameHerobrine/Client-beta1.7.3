@@ -8,7 +8,7 @@ import dozer.util.chat.ChatPrintUtil;
 import java.util.stream.Collectors;
 
 @CommandInfo(name = "commands", description = "Lists all commands")
-public class CommandsModule extends Command {
+public class CommandCommands extends Command {
 
     @Override
     public void execute(String[] args) {

@@ -16,7 +16,7 @@ public class HudScreen extends GuiScreen implements ClientUtil {
 
     public HudScreen() {
 
-        hudPanel = new HudPanel(40, 40, 100, 14, new Color(253, 169, 0));
+        hudPanel = new HudPanel(150, 40, 100, 14, new Color(253, 169, 0));
 
         getDozer().getHudManager().getHudModules().forEach(hudElement -> {
             hudElements.add(new HudElementWidget(hudElement, hudElement.getX(), hudElement.getY(), hudElement.getWidth(), hudElement.getHeight(), new Color(35, 35, 35, 180)));

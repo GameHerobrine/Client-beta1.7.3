@@ -2,7 +2,7 @@ package dozer.ui.clickGui.impl;
 
 import dozer.Dozer;
 import dozer.systems.module.Module;
-import dozer.systems.module.impl.client.ClickGuiModule;
+import dozer.systems.module.impl.client.ModuleClickGUI;
 import dozer.systems.setting.Setting;
 import dozer.systems.setting.impl.SettingCheckBox;
 import dozer.systems.setting.impl.SettingMode;
@@ -66,7 +66,7 @@ public class ModuleButton extends Widget<Module> {
         if(!isHovering(mouseX, mouseY)) return;
 
         switch (mouseButton) {
-            case 0 -> {if(!type.getClass().equals(ClickGuiModule.class)) type.toggle();}
+            case 0 -> {if(!type.getClass().equals(ModuleClickGUI.class)) type.toggle();}
             case 1 -> extended = !extended;
             case 2 -> binding = true;
         }

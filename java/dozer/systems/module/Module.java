@@ -11,9 +11,9 @@ public class Module implements MinecraftUtil {
   protected ModuleCategory category;
   protected int keyBind;
   protected boolean toggled;
-  private final ModuleInfo moduleinfo = getClass().getAnnotation(ModuleInfo.class);
 
   public Module() {
+    ModuleInfo moduleinfo = getClass().getAnnotation(ModuleInfo.class);
     setName(moduleinfo.name());
     setDescription(moduleinfo.description());
     setCategory(moduleinfo.category());
@@ -22,7 +22,6 @@ public class Module implements MinecraftUtil {
     this.suffix = "";
     Dozer.getSingleton().getSettingManager().addToSettingManager(this);
   }
-
 
   public void onEnable() {}
 

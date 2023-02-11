@@ -7,7 +7,7 @@ import dozer.ui.clickGui.ClickGUI;
 import org.lwjgl.input.Keyboard;
 
 @ModuleInfo(name = "ClickGUI", description = "Opens the ClickGUI.", category = ModuleCategory.CLIENT, keyCode = Keyboard.KEY_RSHIFT)
-public class ClickGuiModule extends Module {
+public class ModuleClickGUI extends Module {
 
     @Override
     public void onEnable() {

@@ -4,7 +4,7 @@ import dozer.systems.command.Command;
 import dozer.systems.command.CommandInfo;
 
 @CommandInfo(name = "say", description = "Relays message to chat")
-public class SayCommand extends Command {
+public class CommandSay extends Command {
 
     @Override
     public void execute(String[] args) {

@@ -25,7 +25,7 @@ import static org.lwjgl.opengl.GL11.*;
  * @author Signam, MedMex & Eternal
  */
 @ModuleInfo(name = "ShaderESP", description = "Draws esp", category = ModuleCategory.RENDER)
-public class Shader extends Module {
+public class ModuleShader extends Module {
 
 
 

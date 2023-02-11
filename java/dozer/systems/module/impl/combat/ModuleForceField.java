@@ -19,7 +19,7 @@ import java.util.function.Predicate;
     description = "Attacks entities around you.",
     category = ModuleCategory.COMBAT,
     keyCode = Keyboard.KEY_R)
-public class ForceField extends Module {
+public class ModuleForceField extends Module {
 
   private final TimerUtil timer = new TimerUtil();
   private final Predicate<Entity> entityPredicate = entity ->

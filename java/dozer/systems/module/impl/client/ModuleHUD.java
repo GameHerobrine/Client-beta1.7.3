@@ -1,22 +1,16 @@
 package dozer.systems.module.impl.client;
 
-import dozer.Dozer;
-import dozer.event.Subscribe;
-import dozer.event.impl.Render2DEvent;
 import dozer.systems.module.ModuleCategory;
 import dozer.ui.hudEditor.HudScreen;
 import dozer.util.chat.ChatColorUtil;
-import net.minecraft.src.FontRenderer;
-import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.gui.GuiChat;
 import dozer.systems.module.ModuleInfo;
 import dozer.systems.module.Module;
 
 import java.util.Comparator;
-import java.util.List;
 
 @ModuleInfo(name = "HUD", description = "Displays the HUD.", category = ModuleCategory.CLIENT)
-public class HUD extends Module {
+public class ModuleHUD extends Module {
 
     private final ChatColorUtil chatColorUtil = new ChatColorUtil();
 
