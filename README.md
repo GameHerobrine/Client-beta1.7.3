@@ -9,7 +9,7 @@ Dozer is a fork of MCP, and is intended to be a utility mod for the `2beta2t.net
 ## How do I use it?
 
 Dozer's default key bind for it's ClickGUI is `RSHIFT` / `RIGHT SHIFT`.
-You can change this by right-clicking the module you wish to change the key bind of.
+You can change this by middle-clicking the module you wish to change the key bind of.
 
 ## How to add an event
 

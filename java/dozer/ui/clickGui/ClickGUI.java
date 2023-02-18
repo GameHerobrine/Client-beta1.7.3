@@ -3,8 +3,7 @@ package dozer.ui.clickGui;
 import dozer.systems.module.ModuleCategory;
 import dozer.ui.clickGui.impl.CategoryPanel;
 import dozer.ui.clickGui.impl.ModuleButton;
-import dozer.util.render.Render2DUtil;
-import net.minecraft.client.Minecraft;
+import dozer.util.render.UtilRender2D;
 import net.minecraft.src.gui.GuiScreen;
 
 
@@ -12,21 +11,21 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClickGUI extends GuiScreen implements Render2DUtil {
+public class ClickGUI extends GuiScreen implements UtilRender2D {
 
     private final List<CategoryPanel> panels = new ArrayList<>();
 
     public ClickGUI() {
 
-        int y = 5;
+        int y = 4;
         int width = 100;
         int height = 14;
         int offset = 0;
-        int x = 40;
+        int x = 4;
 
         for (ModuleCategory category : ModuleCategory.values()) {
-            panels.add(new CategoryPanel(category, x + offset, y, width, height, category.getColor()));
-            offset += width + 1;
+            panels.add(new CategoryPanel(category, x + offset, y, width, height, new Color(0xD69723)));
+            offset += width + 2;
         }
     }
 

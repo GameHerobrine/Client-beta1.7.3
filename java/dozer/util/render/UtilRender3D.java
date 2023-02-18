@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class Render3DUtil {
+public class UtilRender3D {
     public static void drawOutlinedEntityESP(double x, double y, double z, double width, double height, Color color) {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);

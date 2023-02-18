@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CategoryPanel extends Widget<ModuleCategory> {
 
     public List<ModuleButton> buttons = new ArrayList<>();
-    private boolean extended, dragging;
+    private boolean extended = true, dragging;
     private int startingX, startingY;
 
     public CategoryPanel(ModuleCategory category, int x, int y, int width, int height, Color color) {
@@ -27,16 +27,14 @@ public class CategoryPanel extends Widget<ModuleCategory> {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-
         if(dragging) {
             x = mouseX + startingX;
             y = mouseY + startingY;
         }
 
-
         drawRect(x, y, x + width, y + height, color);
         drawStringWithShadow(type.getName(), x + 2,  y + 2, Color.WHITE);
-        drawStringWithShadow(extended ? "-" : "+",x + width - 10,  y + 2, Color.WHITE);
+        drawStringWithShadow(extended ? "-" : "+", x + width - 10,  y + 3, Color.WHITE);
 
         if (!extended) return;
         int count = 0;

@@ -8,7 +8,7 @@ import dozer.systems.setting.Serialize;
 
 
 @ModuleInfo(name = "Main Menu", description = "Settings for the main menu", category = ModuleCategory.CLIENT)
-public class MainMenu extends Module {
+public class ModuleMainMenu extends Module {
 
     @Serialize(name = "buttons")
     @CheckBox()

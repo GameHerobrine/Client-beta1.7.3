@@ -1,6 +1,6 @@
 package dozer.util.chat;
 
-public class ChatColorUtil {
+public class UtilChatColor {
 
     public String BLACK = "\u00A70";
     public String DARK_BLUE = "\u00A71";

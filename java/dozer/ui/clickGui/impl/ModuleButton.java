@@ -2,7 +2,7 @@ package dozer.ui.clickGui.impl;
 
 import dozer.Dozer;
 import dozer.systems.module.Module;
-import dozer.systems.module.impl.client.ClickGuiModule;
+import dozer.systems.module.impl.client.ModuleClickGUI;
 import dozer.systems.setting.Setting;
 import dozer.systems.setting.impl.SettingCheckBox;
 import dozer.systems.setting.impl.SettingMode;
@@ -34,14 +34,13 @@ public class ModuleButton extends Widget<Module> {
             if(setting instanceof SettingSlider settingSlider) settingComponents.add(new Slider(settingSlider, x, startY + height * count, width, height, color));
             count++;
         }
-
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawRect(x, y, x + width, y + height, new Color(16, 16, 16, 200));
-        drawStringWithShadow(binding ? "Listening..." : type.getName(), x + 3, y + 2, type.isToggled() ? Color.WHITE : new Color(150, 150, 150));
-        drawStringWithShadow(extended ? "-" : "+", x + width - 10, y + 2, type.isToggled() ? Color.WHITE : new Color(150, 150, 150));
+        drawStringWithShadow(binding ? "Listening..." : type.getName(), x + 3, y + 3, type.isToggled() ? Color.WHITE : new Color(150, 150, 150));
+        drawStringWithShadow(extended ? "-" : "+", x + width - 10, y + 3, type.isToggled() ? Color.WHITE : new Color(150, 150, 150));
 
         int count = 0;
         int settingHeight = 0;
@@ -66,7 +65,7 @@ public class ModuleButton extends Widget<Module> {
         if(!isHovering(mouseX, mouseY)) return;
 
         switch (mouseButton) {
-            case 0 -> {if(!type.getClass().equals(ClickGuiModule.class)) type.toggle();}
+            case 0 -> {if(!type.getClass().equals(ModuleClickGUI.class)) type.toggle();}
             case 1 -> extended = !extended;
             case 2 -> binding = true;
         }

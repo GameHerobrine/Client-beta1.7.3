@@ -5,7 +5,7 @@ import dozer.systems.command.Command;
 import dozer.systems.command.CommandInfo;
 
 @CommandInfo(name = "prefix", description = "Sets the client prefix")
-public class PrefixCommand extends Command {
+public class CommandPrefix extends Command {
 
     @Override
     public void execute(String[] args) {

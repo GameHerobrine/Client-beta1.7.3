@@ -1,19 +1,19 @@
 package dozer.systems.module;
 
 import dozer.Dozer;
-import dozer.util.MinecraftUtil;
+import dozer.util.UtilMinecraft;
 import lombok.Data;
 
 @Data
-public class Module implements MinecraftUtil {
+public class Module implements UtilMinecraft {
 
   protected String name, description, suffix;
   protected ModuleCategory category;
   protected int keyBind;
   protected boolean toggled;
-  private final ModuleInfo moduleinfo = getClass().getAnnotation(ModuleInfo.class);
 
   public Module() {
+    ModuleInfo moduleinfo = getClass().getAnnotation(ModuleInfo.class);
     setName(moduleinfo.name());
     setDescription(moduleinfo.description());
     setCategory(moduleinfo.category());
@@ -22,7 +22,6 @@ public class Module implements MinecraftUtil {
     this.suffix = "";
     Dozer.getSingleton().getSettingManager().addToSettingManager(this);
   }
-
 
   public void onEnable() {}
 

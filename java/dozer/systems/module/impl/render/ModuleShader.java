@@ -11,7 +11,7 @@ import dozer.systems.setting.Serialize;
 import dozer.systems.setting.annotation.Mode;
 import dozer.util.render.shader.FillShader;
 import dozer.util.render.shader.OutlineShader;
-import dozer.util.render.shader.ShaderProgram;
+import dozer.util.render.shader.UtilShader;
 import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.entity.*;
 import net.minecraft.src.render.RenderManager;
@@ -25,7 +25,7 @@ import static org.lwjgl.opengl.GL11.*;
  * @author Signam, MedMex & Eternal
  */
 @ModuleInfo(name = "ShaderESP", description = "Draws esp", category = ModuleCategory.RENDER)
-public class Shader extends Module {
+public class ModuleShader extends Module {
 
 
 
@@ -94,7 +94,7 @@ public class Shader extends Module {
   @Subscribe
   public void onRender2D(Render2DEvent event) {
 
-    ShaderProgram shader = null;
+    UtilShader shader = null;
 
     switch (mode) {
       case "Outline" -> {

@@ -7,7 +7,7 @@ import net.minecraft.src.gui.Gui;
 
 import java.awt.*;
 
-public interface Render2DUtil {
+public interface UtilRender2D {
 
     /**
      * returns minecraft font renderer

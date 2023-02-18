@@ -1,7 +1,7 @@
 package dozer;
 
-import dozer.systems.command.CommandManager;
 import dozer.event.EventBus;
+import dozer.systems.command.CommandManager;
 import dozer.systems.hud.HudManager;
 import dozer.systems.hud.HudRenderer;
 import dozer.systems.module.ModuleManager;
@@ -9,9 +9,6 @@ import dozer.systems.setting.SettingManager;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
-
-import java.awt.*;
-import java.util.Objects;
 
 @Getter
 public class Dozer {
@@ -32,6 +29,7 @@ public class Dozer {
   @SneakyThrows
   public void init() {
     System.out.println("Initializing DozerHack...");
+
     moduleManager.init();
     commandManager.init();
     settingManager.init();

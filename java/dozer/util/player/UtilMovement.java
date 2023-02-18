@@ -1,8 +1,8 @@
 package dozer.util.player;
 
-import dozer.util.MinecraftUtil;
+import dozer.util.UtilMinecraft;
 
-public class MovementUtil implements MinecraftUtil {
+public class UtilMovement implements UtilMinecraft {
 
     public static void setSpeed(double moveSpeed, float yaw, double strafe, double forward) {
         if (forward != 0.0D) {
