@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL20.glUniform1f;
 
-public class FillShader extends UtilShader {
+public class FillShader extends ShaderProgram {
     private Color color = Color.white;
     private float lineWidth = 1.5f;
     Minecraft mc = Minecraft.getMinecraft();

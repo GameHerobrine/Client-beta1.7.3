@@ -7,7 +7,7 @@ import net.minecraft.client.Minecraft;
 import static org.lwjgl.opengl.GL20.*;
 
 
-public class OutlineShader extends UtilShader {
+public class OutlineShader extends ShaderProgram {
     private Color color = Color.white;
     private float lineWidth = 1.5f;
     Minecraft mc = Minecraft.getMinecraft();

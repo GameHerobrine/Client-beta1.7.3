@@ -11,11 +11,7 @@ import java.nio.FloatBuffer;
 import static org.lwjgl.opengl.GL20.glGetUniformLocation;
 
 @Getter
-<<<<<<<< HEAD:java/dozer/util/render/shader/ShaderProgram.java
 public class ShaderProgram {
-========
-public class UtilShader {
->>>>>>>> 264106dac74f7c83e9ad9f9e6b5354b0403ac5da:java/dozer/util/render/shader/UtilShader.java
 
   private final int programID;
   private final int vertexID;
@@ -23,15 +19,9 @@ public class UtilShader {
   private final long initTime = System.currentTimeMillis();
 
   @SneakyThrows
-<<<<<<<< HEAD:java/dozer/util/render/shader/ShaderProgram.java
   public ShaderProgram(String vertex, String fragment) {
     vertexID = loadShader(ShaderProgram.class.getClassLoader().getResourceAsStream(vertex), GL20.GL_VERTEX_SHADER);
     fragmentID = loadShader(ShaderProgram.class.getClassLoader().getResourceAsStream(fragment), GL20.GL_FRAGMENT_SHADER);
-========
-  public UtilShader(String vertex, String fragment) {
-    vertexID = loadShader(UtilShader.class.getClassLoader().getResourceAsStream(vertex), GL20.GL_VERTEX_SHADER);
-    fragmentID = loadShader(UtilShader.class.getClassLoader().getResourceAsStream(fragment), GL20.GL_FRAGMENT_SHADER);
->>>>>>>> 264106dac74f7c83e9ad9f9e6b5354b0403ac5da:java/dozer/util/render/shader/UtilShader.java
     programID = GL20.glCreateProgram();
     GL20.glAttachShader(programID, vertexID);
     GL20.glAttachShader(programID, fragmentID);
