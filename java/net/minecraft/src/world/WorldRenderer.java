@@ -1,7 +1,3 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode
-
 package net.minecraft.src.world;
 
 import net.minecraft.src.*;
@@ -19,20 +15,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-// Referenced classes of package net.minecraft.src:
-//            MathHelper, AxisAlignedBB, RenderItem, Chunk,
-//            ChunkCache, RenderBlocks, IBlockAccess, Tessellator,
-//            Block, TileEntityRenderer, Entity, ICamera,
-//            World
-
 public class WorldRenderer {
 
   public static int chunksUpdated = 0;
-  private static Tessellator tessellator;
-
-  static {
-    tessellator = Tessellator.instance;
-  }
+  private static final Tessellator tessellator = Tessellator.instance;
 
   public World worldObj;
   public int posX;
@@ -60,10 +46,10 @@ public class WorldRenderer {
   public boolean isWaitingOnOcclusionQuery;
   public int glOcclusionQuery;
   public boolean isChunkLit;
-  public List tileEntityRenderers;
+  public List<TileEntity> tileEntityRenderers;
   private int glRenderList;
   private boolean isInitialized;
-  private List<TileEntity> tileEntities;
+  private final List<TileEntity> tileEntities;
 
   public WorldRenderer(World world, List<TileEntity> list, int i, int j, int k, int l, int i1) {
     glRenderList = -1;
@@ -71,7 +57,7 @@ public class WorldRenderer {
     skipRenderPass = new boolean[2];
     isVisible = true;
     isInitialized = false;
-    tileEntityRenderers = new ArrayList();
+    tileEntityRenderers = new ArrayList<>();
     worldObj = world;
     tileEntities = list;
     sizeWidth = sizeHeight = sizeDepth = l;
@@ -86,9 +72,7 @@ public class WorldRenderer {
   }
 
   public void setPosition(int i, int j, int k) {
-    if (i == posX && j == posY && k == posZ) {
-      return;
-    } else {
+    if (!(i == posX && j == posY && k == posZ)) {
       setDontDraw();
       posX = i;
       posY = j;
@@ -122,7 +106,6 @@ public class WorldRenderer {
               (float) (posZClip + sizeDepth) + f));
       GL11.glEndList();
       markDirty();
-      return;
     }
   }
 

@@ -11,7 +11,7 @@ import dozer.systems.setting.Serialize;
 import dozer.systems.setting.annotation.Mode;
 import dozer.util.render.shader.FillShader;
 import dozer.util.render.shader.OutlineShader;
-import dozer.util.render.shader.ShaderUtil;
+import dozer.util.render.shader.ShaderProgram;
 import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.entity.*;
 import net.minecraft.src.render.RenderManager;
@@ -94,7 +94,7 @@ public class Shader extends Module {
   @Subscribe
   public void onRender2D(Render2DEvent event) {
 
-    ShaderUtil shader = null;
+    ShaderProgram shader = null;
 
     switch (mode) {
       case "Outline" -> {

@@ -286,8 +286,6 @@ public abstract class Minecraft implements Runnable {
   }
 
   public void startGame() throws LWJGLException {
-
-
     this.gameSettings = new GameSettings(this, mcDataDir);
 
     if (mcCanvas != null) {
@@ -318,11 +316,9 @@ public abstract class Minecraft implements Runnable {
       lwjglexception.printStackTrace();
       try {
         Thread.sleep(1000L);
-      } catch (InterruptedException interruptedexception) {
-      }
+      } catch (InterruptedException ignored) {}
       Display.create();
     }
-
 
     OpenGlHelper.initializeTextures();
     this.framebuffer = new Framebuffer(this.displayWidth, this.displayHeight, true);
@@ -381,8 +377,7 @@ public abstract class Minecraft implements Runnable {
     try {
       downloadResourcesThread = new ThreadDownloadResources(mcDataDir, this);
       downloadResourcesThread.start();
-    } catch (Exception exception1) {
-    }
+    } catch (Exception ignored) {}
     checkGLError("Post startup");
     ingameGUI = new GuiIngame(this);
 
@@ -392,7 +387,6 @@ public abstract class Minecraft implements Runnable {
     } else {
       displayGuiScreen(new GuiMainMenu());
     }
-
 
     Dozer.getSingleton().init();
   }
@@ -445,10 +439,10 @@ public abstract class Minecraft implements Runnable {
     float f1 = 0.00390625F;
     Tessellator tessellator = Tessellator.instance;
     tessellator.startDrawingQuads();
-    tessellator.addVertexWithUV(i + 0, j + j1, 0.0D, (float) (k + 0) * f, (float) (l + j1) * f1);
+    tessellator.addVertexWithUV(i, j + j1, 0.0D, (float) (k) * f, (float) (l + j1) * f1);
     tessellator.addVertexWithUV(i + i1, j + j1, 0.0D, (float) (k + i1) * f, (float) (l + j1) * f1);
-    tessellator.addVertexWithUV(i + i1, j + 0, 0.0D, (float) (k + i1) * f, (float) (l + 0) * f1);
-    tessellator.addVertexWithUV(i + 0, j + 0, 0.0D, (float) (k + 0) * f, (float) (l + 0) * f1);
+    tessellator.addVertexWithUV(i + i1, j, 0.0D, (float) (k + i1) * f, (float) (l) * f1);
+    tessellator.addVertexWithUV(i, j, 0.0D, (float) (k) * f, (float) (l) * f1);
     tessellator.draw();
   }
 

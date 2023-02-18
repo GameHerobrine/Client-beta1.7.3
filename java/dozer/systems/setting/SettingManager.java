@@ -1,6 +1,6 @@
 package dozer.systems.setting;
 
-import dozer.setting.annotation.CheckBox;
+import dozer.systems.setting.annotation.CheckBox;
 import dozer.systems.setting.annotation.*;
 import dozer.systems.setting.impl.SettingCheckBox;
 import dozer.systems.setting.impl.SettingMode;

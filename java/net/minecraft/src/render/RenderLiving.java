@@ -211,10 +211,10 @@ public class RenderLiving extends Render {
     tessellator.addVertex(j + 1, -1 + byte0, 0.0D);
     tessellator.draw();
     GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
-    fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, 0x20ffffff);
+    fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2f, byte0, 0x20ffffff);
     GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
     GL11.glDepthMask(true);
-    fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2, byte0, -1);
+    fontrenderer.drawString(s, -fontrenderer.getStringWidth(s) / 2f, byte0, -1);
     GL11.glEnable(2896 /*GL_LIGHTING*/);
     GL11.glDisable(3042 /*GL_BLEND*/);
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

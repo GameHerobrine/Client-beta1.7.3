@@ -32,7 +32,7 @@ public class GuiErrorScreen extends GuiScreen {
         fontRenderer,
         "Minecraft has run out of memory.",
         width / 2 - 140,
-        (height / 4 - 60) + 60 + 0,
+        (height / 4 - 60) + 60,
         0xa0a0a0);
     drawString(
         fontRenderer,

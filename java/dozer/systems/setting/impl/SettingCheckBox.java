@@ -2,7 +2,7 @@ package dozer.systems.setting.impl;
 
 
 
-import dozer.setting.annotation.CheckBox;
+import dozer.systems.setting.annotation.CheckBox;
 import dozer.systems.setting.Setting;
 
 import java.lang.reflect.Field;

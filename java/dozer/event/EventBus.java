@@ -40,7 +40,7 @@ public class EventBus {
                 .forEach(method -> {
                     try {
                         method.invoke(methodObjectMap.get(method), event);
-                    } catch (IllegalAccessException | InvocationTargetException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 });

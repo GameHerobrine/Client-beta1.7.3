@@ -42,7 +42,7 @@ public class GuiConflictWarning extends GuiScreen {
         fontRenderer,
         "Minecraft detected a conflict in the level save data.",
         width / 2 - 140,
-        (height / 4 - 60) + 60 + 0,
+        (height / 4 - 60) + 60,
         0xa0a0a0);
     drawString(
         fontRenderer,

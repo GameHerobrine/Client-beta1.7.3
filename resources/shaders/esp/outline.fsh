@@ -1,8 +1,3 @@
-/*
- Thank you cosmos (love you linus (non homosexually))
- https://github.com/momentumdevelopment/cosmos-beta/blob/main/src/main/resources/assets/cosmos/shaders/glsl/outline.frag
-*/
-
 #version 120
 
 // texture based on the entity, uv (1 / resolution)
