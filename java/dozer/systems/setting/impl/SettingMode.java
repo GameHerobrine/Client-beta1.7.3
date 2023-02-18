@@ -52,4 +52,13 @@ public class SettingMode extends Setting<Mode, String> {
     setMode(getModes().get(index));
   }
 
+  public void cycleReverse() {
+    if (index > 0) {
+    index--;
+    } else {
+    index = getModes().size() - 1;
+    }
+    setMode(getModes().get(index));
+  }
+
 }

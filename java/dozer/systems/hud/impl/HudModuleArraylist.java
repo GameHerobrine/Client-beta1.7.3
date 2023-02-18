@@ -24,8 +24,7 @@ public class HudModuleArraylist extends HudElement {
 
     @Override
     public void setDimensions(int width, int height) {
-        // for each module * 10
-        super.setDimensions(100, getY() + (Dozer.getSingleton().getModuleManager().getEnabledModules().size() * 8));
+        super.setDimensions(100, Dozer.getSingleton().getModuleManager().getEnabledModules().size() > 0 ? Dozer.getSingleton().getModuleManager().getEnabledModules().size() * 10 - 10 : 10);
     }
 
 }

@@ -38,7 +38,7 @@ public class Slider extends Widget<SettingSlider> {
         }
 
         drawRect(x, y, x + 100, y + 14, new Color(16, 16, 16, 200));
-        drawRect(x, y + 13, (int) (x + (width * getPercentage())), y + 14, new Color(255, 255, 255, 200));
+        drawRect(x, y + 13, (int) (x + (width * getPercentage())), y + 14, color);
         drawStringWithShadow(type.getName(), this.x + 2, this.y + 3, Color.WHITE);
         drawStringWithShadow(type.getValue() + "", this.x + 100 - fontRenderer().getStringWidth(type.getValue() + "") - 2, this.y + 2, Color.WHITE);
     }

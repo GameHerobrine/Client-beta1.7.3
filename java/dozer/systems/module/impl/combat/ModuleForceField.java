@@ -31,15 +31,15 @@ public class ModuleForceField extends Module {
   @Slider(min = 4, max = 20, increment = 0.1)
   public double aps = 12;
 
-  @Serialize(name = "attackPlayers")
+  @Serialize(name = "Players")
   @CheckBox
   public boolean attackPlayers = true;
 
-  @Serialize(name = "attackMobs")
+  @Serialize(name = "Mobs")
   @CheckBox
   public boolean attackMobs = true;
 
-  @Serialize(name = "attackAnimals")
+  @Serialize(name = "Animals")
   @CheckBox
   public boolean attackAnimals = true;
 
@@ -54,7 +54,7 @@ public class ModuleForceField extends Module {
 
     for (int i = 0; i < entityList.size(); i++) {
       boolean check = isEntityValid((Entity) entityList.get(i)) && entityList.get(i) != mc.thePlayer && mc.thePlayer.getDistanceToEntity((Entity) entityList.get(i)) <= range;
-      if (check) {
+      if (check && timer.hasReached((long) (1000 / aps))) {
         mc.playerController.attackEntity(mc.thePlayer, (Entity) entityList.get(i));
         timer.reset();
       }

@@ -32,7 +32,8 @@ public class ModuleShader extends Module {
   @Serialize(name = "Mode")
   @Mode(modes = {
           "Outline",
-          "Shader"
+          "Shader",
+          "Fill"
   })
   public String mode = "Outline";
 

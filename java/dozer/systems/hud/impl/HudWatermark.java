@@ -16,7 +16,7 @@ public class HudWatermark extends HudElement {
 
     @Override
     public void setDimensions(int width, int height) {
-        super.setDimensions(fontRenderer().getStringWidth(Dozer.getSingleton().getName() + " " + Dozer.getSingleton().getVersion()), 12);
+        super.setDimensions(fontRenderer().getStringWidth(Dozer.getSingleton().getName() + " " + Dozer.getSingleton().getVersion()) + 1, 9);
     }
 
 }

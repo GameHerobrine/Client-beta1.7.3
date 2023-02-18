@@ -13,20 +13,17 @@ import net.minecraft.src.network.packets.Packet10Flying;
 @ModuleInfo(name = "NoFallDamage", description = "Prevents you from taking fall damage.", category = ModuleCategory.PLAYER)
 public class ModuleNoFallDamage extends Module {
 
-    private final UtilTimer timer = new UtilTimer();
-
     @Subscribe
     public void onUpdate(final UpdateEvent event) {
         if (Dozer.getSingleton().getModuleManager().getModuleByClass(ModuleFlight.class).isToggled())
             return;
         if (mc.theWorld.multiplayerWorld) {
-            if (mc.thePlayer.fallDistance > 2.5F) {
+            if (mc.thePlayer.fallDistance > 2F) {
                 mc.getSendQueue().addToSendQueue(new Packet10Flying(true));
                 mc.thePlayer.fallDistance = 0.0F;
-                timer.reset();
             }
         } else {
-            if (mc.thePlayer.fallDistance > 2.5F) {
+            if (mc.thePlayer.fallDistance > 2F) {
                 mc.thePlayer.fallDistance = 0.0F;
             }
         }
