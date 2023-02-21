@@ -1,4 +1,4 @@
-package dozer.systems.module.impl.player;
+package dozer.systems.module.impl.misc;
 
 import dozer.event.Subscribe;
 import dozer.event.impl.PacketEvent;
@@ -7,7 +7,7 @@ import dozer.systems.module.ModuleCategory;
 import dozer.systems.module.ModuleInfo;
 import net.minecraft.src.network.packets.Packet28EntityVelocity;
 
-@ModuleInfo(name = "AntiKnockBack", description = "Prevents the player from being knocked back.", category = ModuleCategory.PLAYER)
+@ModuleInfo(name = "AntiKnockBack", description = "Prevents the player from being knocked back.", category = ModuleCategory.MISC)
 public class ModuleAntiKnockBack extends Module {
 
     @Subscribe

@@ -2,8 +2,8 @@ package dozer;
 
 import dozer.event.EventBus;
 import dozer.systems.command.CommandManager;
-import dozer.systems.hud.HudManager;
-import dozer.systems.hud.HudRenderer;
+import dozer.systems.hud.HUDManager;
+import dozer.systems.hud.HUDRenderer;
 import dozer.systems.module.ModuleManager;
 import dozer.systems.setting.SettingManager;
 import lombok.Getter;
@@ -23,8 +23,8 @@ public class Dozer {
   private final ModuleManager moduleManager = new ModuleManager();
   private final CommandManager commandManager = new CommandManager();
   private final EventBus eventBus = new EventBus();
-  private final HudManager hudManager = new HudManager();
-  private final HudRenderer hudRenderer = new HudRenderer();
+  private final HUDManager hudManager = new HUDManager();
+  private final HUDRenderer hudRenderer = new HUDRenderer();
 
   @SneakyThrows
   public void init() {

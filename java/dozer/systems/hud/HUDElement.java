@@ -7,14 +7,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public abstract class HudElement implements UtilMinecraft, UtilRender2D {
+public abstract class HUDElement implements UtilMinecraft, UtilRender2D {
 
     String name, description;
     int x, y, width, height;
-    HudElementInfo hudModuleInfo = getClass().getAnnotation(HudElementInfo.class);
+    HUDElementInfo hudModuleInfo = getClass().getAnnotation(HUDElementInfo.class);
     boolean toggled;
 
-    public HudElement() {
+    public HUDElement() {
         setName(hudModuleInfo.name());
         setDescription(hudModuleInfo.description());
         setX(hudModuleInfo.x());

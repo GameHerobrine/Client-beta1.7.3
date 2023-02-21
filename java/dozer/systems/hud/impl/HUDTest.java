@@ -1,11 +1,11 @@
 package dozer.systems.hud.impl;
 
-import dozer.systems.hud.HudElement;
-import dozer.systems.hud.HudElementInfo;
+import dozer.systems.hud.HUDElement;
+import dozer.systems.hud.HUDElementInfo;
 import java.awt.*;
 
-@HudElementInfo(name = "Test", description = "test", x = 250, y = 40)
-public class TestHud extends HudElement {
+@HUDElementInfo(name = "Test", description = "test", x = 250, y = 40)
+public class HUDTest extends HUDElement {
 
     @Override
     public void render() {

@@ -1,16 +1,16 @@
 package dozer.ui.hudEditor.impl;
 
-import dozer.systems.hud.HudElement;
+import dozer.systems.hud.HUDElement;
 import dozer.ui.clickGui.impl.Widget;
 
 import java.awt.*;
 
-public class HudElementWidget extends Widget<HudElement> {
+public class HudElementWidget extends Widget<HUDElement> {
 
     boolean dragged;
     int startingX, startingY;
 
-    public HudElementWidget(HudElement type, int x, int y, int width, int height, Color color) {
+    public HudElementWidget(HUDElement type, int x, int y, int width, int height, Color color) {
         super(type, x, y, width, height, color);
     }
 

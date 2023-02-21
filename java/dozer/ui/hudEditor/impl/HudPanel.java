@@ -1,7 +1,5 @@
 package dozer.ui.hudEditor.impl;
 
-import dozer.Dozer;
-import dozer.systems.hud.HudElement;
 import dozer.ui.clickGui.impl.Widget;
 
 import java.awt.*;

@@ -1,4 +1,4 @@
-package dozer.systems.module.impl.player;
+package dozer.systems.module.impl.misc;
 
 import dozer.Dozer;
 import dozer.event.Subscribe;
@@ -10,7 +10,7 @@ import dozer.systems.module.impl.movement.ModuleFlight;
 import dozer.util.misc.UtilTimer;
 import net.minecraft.src.network.packets.Packet10Flying;
 
-@ModuleInfo(name = "NoFallDamage", description = "Prevents you from taking fall damage.", category = ModuleCategory.PLAYER)
+@ModuleInfo(name = "NoFallDamage", description = "Prevents you from taking fall damage.", category = ModuleCategory.MISC)
 public class ModuleNoFallDamage extends Module {
 
     @Subscribe

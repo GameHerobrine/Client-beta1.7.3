@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface HudElementInfo {
+public @interface HUDElementInfo {
 
     String name();
     String description();

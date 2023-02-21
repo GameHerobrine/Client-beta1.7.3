@@ -1,13 +1,13 @@
 package dozer.systems.hud.impl;
 
 import dozer.Dozer;
-import dozer.systems.hud.HudElement;
-import dozer.systems.hud.HudElementInfo;
+import dozer.systems.hud.HUDElement;
+import dozer.systems.hud.HUDElementInfo;
 
 import java.awt.*;
 
-@HudElementInfo(name = "Watermark", description = "Displays the client name and version.", x = 4, y = 4)
-public class HudWatermark extends HudElement {
+@HUDElementInfo(name = "Watermark", description = "Displays the client name and version.", x = 4, y = 4)
+public class HUDWatermark extends HUDElement {
 
     @Override
     public void render() {

@@ -1,15 +1,15 @@
 package dozer.systems.hud.impl;
 
 import dozer.Dozer;
-import dozer.systems.hud.HudElement;
-import dozer.systems.hud.HudElementInfo;
+import dozer.systems.hud.HUDElement;
+import dozer.systems.hud.HUDElementInfo;
 import dozer.systems.module.Module;
 
 import java.awt.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@HudElementInfo(name = "Arraylist", description = "Displays enabled modules.", x = 4, y = 14)
-public class HudModuleArraylist extends HudElement {
+@HUDElementInfo(name = "Arraylist", description = "Displays enabled modules.", x = 4, y = 14)
+public class HUDModuleArraylist extends HUDElement {
 
     @Override
     public void render() {
