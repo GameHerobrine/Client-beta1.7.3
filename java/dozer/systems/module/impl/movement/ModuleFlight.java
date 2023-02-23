@@ -12,9 +12,6 @@ import org.lwjgl.input.Keyboard;
 @ModuleInfo(name = "Flight", description = "Allows you to fly.", category = ModuleCategory.MOVEMENT)
 public class ModuleFlight extends Module {
 
-
-
-
     @Subscribe
     public void onUpdate(final UpdateEvent event) {
         mc.thePlayer.motionY = 0.0;
