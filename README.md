@@ -37,7 +37,7 @@ You can change this by middle-clicking the module you wish to change the key bin
 #### Example:
 
 ```java
-package dozer.events.impl;
+package dozer.event.impl;
 
 public class EventName {
     
@@ -107,9 +107,9 @@ public class EntityPlayer extends EntityLiving {
 #### Example:
 
 ```java
-package dozer.modules.impl.categoryName;
+package dozer.module.impl.categoryName;
 
-import dozer.modules.Module;
+import dozer.module.Module;
 
 @ModuleInfo(name = "ModuleName", description = "ModuleDescription", category = ModuleCategory.CategoryName)
 public class ModuleName extends Module {
@@ -124,10 +124,10 @@ public class ModuleName extends Module {
 #### Example:
 
 ```java
-package dozer.modules.impl.categoryName;
+package dozer.module.impl.categoryName;
 
 import dozer.event.Subscribe;
-import dozer.events.impl.EventName;
+import dozer.event.impl.EventName;
 
 @ModuleInfo(name = "ModuleName", description = "ModuleDescription", category = ModuleCategory.CategoryName)
 public class ModuleName extends Module {
