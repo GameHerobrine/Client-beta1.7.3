@@ -1,5 +1,12 @@
 # Dozer
 
+## Notes
+
+> **Note**
+> Source made public, I simply don't have the motivation to continue working on this project to be perfectly honest.
+> Feel free to make forks, pull requests, and issues.
+> I'll try my best to maintain it I guess :^)
+
 ## What is it?
 
 Dozer is a modified client for the [Minecraft](http://minecraft.net) game, version beta 1.7.3. It is a fork of
